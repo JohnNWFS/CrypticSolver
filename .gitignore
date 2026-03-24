@@ -1,0 +1,12 @@
+# GameMaker build output
+/build/
+*.cache
+*.tmp
+
+# GameMaker IDE files
+/.appdata/
+/logs/
+
+# OS files
+.DS_Store
+Thumbs.db

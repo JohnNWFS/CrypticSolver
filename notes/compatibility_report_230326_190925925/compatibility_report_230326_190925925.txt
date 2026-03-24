@@ -1,0 +1,22 @@
+Converting GML script: C:\Users\hoffe\GameMakerProjects\CrypticSolver.gmx\mvc\scripts\scr_pick_a_phrase\scr_pick_a_phrase.gml
+Converted description /// @description This script picks a phrase
+
+Converting GML script: C:\Users\hoffe\GameMakerProjects\CrypticSolver.gmx\mvc\objects\obj_tile_beginner\Create_0.gml
+Converted description /// @description Placeholder
+
+Converting GML script: C:\Users\hoffe\GameMakerProjects\CrypticSolver.gmx\mvc\objects\obj_select_tile\Create_0.gml
+Converted description /// @description Placeholder
+
+Converting GML script: C:\Users\hoffe\GameMakerProjects\CrypticSolver.gmx\mvc\objects\obj_tile\Create_0.gml
+Converted description /// @description Placeholder
+
+Converting GML script: C:\Users\hoffe\GameMakerProjects\CrypticSolver.gmx\mvc\objects\obj_game_control\Create_0.gml
+Converted description /// @description testing tool to see font layed out on tiles
+
+Converting GML script: C:\Users\hoffe\GameMakerProjects\CrypticSolver.gmx\mvc\objects\obj_test\Create_0.gml
+Converted description /// @description Placeholder
+
+Game speed set to 30
+Added compatibility script 'instance\instance_create.gml'
+Added compatibility script 'object\object_get_depth.gml'
+Added compatibility script '__global_object_depths.gml'
