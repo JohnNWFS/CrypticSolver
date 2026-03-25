@@ -14,8 +14,9 @@ global.hints_remaining   = 3;
 
 // --- Build cipher and both versions of the phrase ---
 scr_build_cipher();
-plain_phrase     = scr_pick_a_phrase();
-encrypted_phrase = scr_encrypt_phrase(plain_phrase);
+plain_phrase        = scr_pick_a_phrase();
+global.plain_phrase = plain_phrase;
+encrypted_phrase    = scr_encrypt_phrase(plain_phrase);
 
 // Global state shared by tile interaction
 global.selected_letter  = -1;   // index 0-25 of bank letter currently selected, -1 = none

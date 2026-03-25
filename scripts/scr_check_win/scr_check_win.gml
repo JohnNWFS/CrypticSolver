@@ -20,6 +20,6 @@ function scr_check_win() {
 				image_blend = make_colour_hsv(40, 220, 255);  // gold
 			}
 		}
-		scr_show_popup("You solved it!\n\nWell done — the puzzle is complete.\n\nClick to return to the puzzle menu.", "win");
+		scr_show_popup("", "win");
 	}
 }
