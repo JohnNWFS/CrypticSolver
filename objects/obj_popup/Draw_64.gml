@@ -49,11 +49,11 @@ if (popup_type == "win") {
     draw_roundrect(_px, _py, _px + _pw, _py + _ph, true);
 
     // Header text
-    draw_set_font(fnt_script);
+    draw_set_font(fnt_script_1);
     draw_set_halign(fa_center);
     draw_set_valign(fa_middle);
     draw_set_colour(_gold);
-    draw_text(_gw * 0.5, _py + 38, "★   PUZZLE  SOLVED   ★");
+    draw_text(_gw * 0.5, _py + 38, "☀   PUZZLE  SOLVED   ☀");
 
     // Divider
     draw_set_colour(make_colour_hsv(40, 160, 180));
@@ -79,6 +79,7 @@ if (popup_type == "win") {
     for (_e = 0; _e < global.win_stars; _e++)          { _earned += "★"; }
     for (_e = global.win_stars; _e < 3; _e++)          { _earned += "☆"; }
 
+    draw_set_font(fnt_script);
     draw_set_colour(make_colour_hsv(40, 200, 255));
     draw_set_alpha(popup_alpha * 0.85);
     draw_text(_gw * 0.5, _py + _ph - 24, global.puzzle_title + "   " + _tstr + "   " + _earned);
