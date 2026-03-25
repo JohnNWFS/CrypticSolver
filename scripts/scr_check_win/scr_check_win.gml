@@ -15,7 +15,7 @@ function scr_check_win() {
 
 	if (total > 0 && solved == total) {
 		// Record elapsed time
-		global.puzzle_elapsed_ms = current_time - puzzle_start_time;
+		global.puzzle_elapsed_ms = current_time - global.puzzle_start_time;
 
 		// Flash every guess tile gold
 		with (obj_tile_beginner) {

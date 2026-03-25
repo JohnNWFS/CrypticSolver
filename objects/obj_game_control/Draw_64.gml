@@ -51,7 +51,7 @@ for (t = 0; t < 3; t++) {
 }
 
 // Running timer (mm:ss) — right-aligned
-var _elapsed_s = floor((current_time - puzzle_start_time) / 1000);
+var _elapsed_s = floor((current_time - global.puzzle_start_time) / 1000);
 var _mm = floor(_elapsed_s / 60);
 var _ss = _elapsed_s mod 60;
 var _time_str = string(_mm) + ":" + ((_ss < 10) ? "0" : "") + string(_ss);

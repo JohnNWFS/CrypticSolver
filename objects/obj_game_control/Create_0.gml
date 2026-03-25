@@ -13,7 +13,7 @@ global.puzzle_difficulty = 1;
 global.hints_remaining   = 3;
 
 // --- Puzzle timer ---
-puzzle_start_time = current_time;   // milliseconds since game start
+global.puzzle_start_time = current_time;   // milliseconds since game start
 global.puzzle_elapsed_ms = 0;
 global.win_stars         = 0;
 
