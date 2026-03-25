@@ -86,20 +86,20 @@ if (keyboard_check_pressed(vk_escape)) {
     scr_update_bank_dimming();
 }
 
-// F cycles: sprites → font 1 → font 2 → … → back to sprites
-if (keyboard_check_pressed(ord("F"))) {
-    global.font_index = (global.font_index + 1) mod (global.font_list_size + 1);
-}
-
-// H uses a hint token to reveal one encrypted-letter group
-if (keyboard_check_pressed(ord("H"))) {
+// F1 uses a hint token to reveal one encrypted-letter group
+if (keyboard_check_pressed(vk_f1)) {
     scr_use_hint();
 }
 
-// R picks a fresh random puzzle and restarts the room
-if (keyboard_check_pressed(ord("R"))) {
+// F2 picks a fresh random puzzle and restarts the room
+if (keyboard_check_pressed(vk_f2)) {
     global.puzzle_index = -1;
     room_restart();
+}
+
+// F3 cycles: sprites → font 1 → font 2 → … → back to sprites
+if (keyboard_check_pressed(vk_f3)) {
+    global.font_index = (global.font_index + 1) mod (global.font_list_size + 1);
 }
 
 // Escape returns to the title / puzzle selector

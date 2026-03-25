@@ -19,14 +19,14 @@ if (mouse_y >= list_y1 && mouse_y < list_y2) {
     hovered_row = -1;
 }
 
-// F toggles letter style (sprites vs font) — persists into the game
-if (keyboard_check_pressed(ord("F"))) {
-    if (!variable_global_exists("use_sprite_letters")) { global.use_sprite_letters = true; }
-    global.use_sprite_letters = !global.use_sprite_letters;
+// F3 toggles font style — persists into the game
+if (keyboard_check_pressed(vk_f3)) {
+    if (!variable_global_exists("font_index")) { global.font_index = 0; }
+    global.font_index = (global.font_index + 1) mod (global.font_list_size + 1);
 }
 
-// H = instructions / about screen
-if (keyboard_check_pressed(ord("H"))) { room_goto(rm_about); }
+// F1 = instructions / about screen
+if (keyboard_check_pressed(vk_f1)) { room_goto(rm_about); }
 
 // --- Bottom buttons hover + click ---
 var _tbi;

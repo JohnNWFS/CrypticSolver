@@ -142,7 +142,7 @@ draw_set_colour(make_colour_hsv(0, 0, 130));
 draw_set_alpha(0.8);
 draw_line(80, list_y2 + 2, room_width - 80, list_y2 + 2);
 draw_set_alpha(0.7);
-draw_text(cx, list_y2 + 46, "R = random puzzle   |   H = instructions   |   F = toggle letter style");
+draw_text(cx, list_y2 + 46, "F1 = instructions   |   F3 = toggle letter style");
 
 // Reset draw state
 draw_set_alpha(1);
