@@ -50,6 +50,16 @@ for (t = 0; t < 3; t++) {
     draw_rectangle(pip_x + t * 14, bar_y + 6, pip_x + t * 14 + 10, bar_y + 11, false);
 }
 
+// Running timer (mm:ss) — right-aligned
+var _elapsed_s = floor((current_time - puzzle_start_time) / 1000);
+var _mm = floor(_elapsed_s / 60);
+var _ss = _elapsed_s mod 60;
+var _time_str = string(_mm) + ":" + ((_ss < 10) ? "0" : "") + string(_ss);
+draw_set_colour(make_colour_hsv(0, 0, 180));
+draw_set_halign(fa_right);
+draw_text(room_width - 8, bar_y, _time_str);
+draw_set_halign(fa_left);
+
 // ---------------------------------------------------------------
 // Action buttons
 // ---------------------------------------------------------------

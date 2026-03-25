@@ -67,13 +67,21 @@ if (popup_type == "win") {
     draw_set_alpha(popup_alpha * 0.92);
     draw_text_ext(_gw * 0.5, _py + 78, "\"" + global.plain_phrase + "\"", -1, _pw - 48);
 
-    // Difficulty stars + puzzle title
-    var _stars = "";
-    var _d;
-    for (_d = 0; _d < global.puzzle_difficulty; _d++) { _stars += "★"; }
+    // Time taken
+    var _tsecs = floor(global.puzzle_elapsed_ms / 1000);
+    var _tmm   = floor(_tsecs / 60);
+    var _tss   = _tsecs mod 60;
+    var _tstr  = string(_tmm) + ":" + ((_tss < 10) ? "0" : "") + string(_tss);
+
+    // Earned stars (speed rating)
+    var _earned = "";
+    var _e;
+    for (_e = 0; _e < global.win_stars; _e++)          { _earned += "★"; }
+    for (_e = global.win_stars; _e < 3; _e++)          { _earned += "☆"; }
+
     draw_set_colour(make_colour_hsv(40, 200, 255));
     draw_set_alpha(popup_alpha * 0.85);
-    draw_text(_gw * 0.5, _py + _ph - 24, global.puzzle_title + "     " + _stars);
+    draw_text(_gw * 0.5, _py + _ph - 24, global.puzzle_title + "   " + _tstr + "   " + _earned);
 
     // Buttons
     var _bw     = 140;

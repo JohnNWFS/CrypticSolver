@@ -12,6 +12,11 @@ global.puzzle_title      = "";
 global.puzzle_difficulty = 1;
 global.hints_remaining   = 3;
 
+// --- Puzzle timer ---
+puzzle_start_time = current_time;   // milliseconds since game start
+global.puzzle_elapsed_ms = 0;
+global.win_stars         = 0;
+
 // --- Build cipher and both versions of the phrase ---
 scr_build_cipher();
 plain_phrase        = scr_pick_a_phrase();
