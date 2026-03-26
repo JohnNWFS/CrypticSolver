@@ -1,7 +1,7 @@
 /// @description Title screen setup.
 scroll_offset = 0;
 hovered_row   = -1;
-total_puzzles = 30;
+total_puzzles = PUZZLE_TOTAL;
 row_h         = 26;
 list_y1       = 110;
 list_y2       = room_height - 66;

@@ -13,8 +13,8 @@ var content_y2 = room_height - footer_h;
 // those bands are painted over afterwards)
 // ---------------------------------------------------------------
 var col_l  = lx;
-var col_r  = 490;
-var col_rd = col_r + 195;
+var col_r  = 450;
+var col_rd = col_r + 224;
 
 // All content offset by scroll
 var oy = content_y1 + 10 - scroll_y;
@@ -122,10 +122,10 @@ ay += lh + 2;
 draw_set_colour(c_white);
 draw_text(lx, ay, "CrypticSolver — a hand-crafted substitution cipher puzzle game.");
 ay += lh;
-draw_text(lx, ay, "Tiles, letters and artwork hand-drawn by the developer.");
+draw_text(lx, ay, "Tiles and Basic letters hand-drawn by the developer. DallE used for some assets.");
 ay += lh;
 draw_set_colour(make_colour_hsv(200, 120, 200));
-draw_text(lx, ay, "Contact:  [your contact info here]");
+draw_text(lx, ay, "Contact:  JohnNWFSDeveloper@gmail.com");
 ay += lh + 16;
 
 // Store scroll_max for Step_0

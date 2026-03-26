@@ -42,7 +42,7 @@ function scr_check_win() {
 
 		// Save progress if this puzzle index is valid and it's a new best
 		var _pi = global.puzzle_index;
-		if (_pi >= 0 && _pi < 30) {
+		if (_pi >= 0 && _pi < PUZZLE_TOTAL) {
 			var _new_secs = global.puzzle_elapsed_ms / 1000;
 			var _prev_stars = global.save_stars[_pi];
 			var _prev_time  = global.save_times[_pi];

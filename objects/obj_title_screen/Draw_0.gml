@@ -11,7 +11,7 @@ draw_set_colour(c_white);
 draw_text(cx, 46, "Decipher the hidden phrase — choose a puzzle to begin");
 
 draw_set_colour(make_colour_hsv(0, 0, 160));
-draw_text(cx, 70, "Easy  (1-10)     Medium  (11-20)     Hard  (21-30)");
+draw_text(cx, 70, "Easy  (1-30)     Medium  (31-60)     Hard  (61-90)");
 
 // Divider
 draw_set_colour(make_colour_hsv(40, 120, 180));
@@ -32,8 +32,8 @@ for (i = start_row; i < min(total_puzzles, start_row + visible_rows + 1); i++) {
     if (ry + row_h < list_y1 || ry > list_y2) continue;
 
     var diff;
-    if      (i < 10) { diff = 1; }
-    else if (i < 20) { diff = 2; }
+    if      (i < 30) { diff = 1; }
+    else if (i < 60) { diff = 2; }
     else             { diff = 3; }
 
     // Row background colour by difficulty, brighter on hover
