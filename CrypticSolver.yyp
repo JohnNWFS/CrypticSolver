@@ -35,12 +35,7 @@
     {"$GMFolder":"","%Name":"Timelines","folderPath":"folders/Timelines.yy","name":"Timelines","resourceType":"GMFolder","resourceVersion":"2.0",},
   ],
   "ForcedPrefabProjectReferences":[],
-  "IncludedFiles":[
-    {"$GMIncludedFile":"v1","%Name":"create_tables.sql","CopyToMask":-1,"filePath":"datafiles","name":"create_tables.sql","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
-    {"$GMIncludedFile":"v1","%Name":"db_config_template.php","CopyToMask":-1,"filePath":"datafiles","name":"db_config_template.php","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
-    {"$GMIncludedFile":"v1","%Name":"submit_score.php","CopyToMask":-1,"filePath":"datafiles","name":"submit_score.php","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
-    {"$GMIncludedFile":"v1","%Name":"get_leaderboard.php","CopyToMask":-1,"filePath":"datafiles","name":"get_leaderboard.php","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
-  ],
+  "IncludedFiles":[],
   "isEcma":false,
   "LibraryEmitters":[],
   "MetaData":{
