@@ -1,8 +1,11 @@
 /// @description Generate all game sound effects from PCM buffers.
 /// Stores sounds in global.snd_* variables. Safe to call once at startup.
 /// No audio files required — all waveforms are computed in code.
+/// NOTE: buffers are kept alive (stored in global.snd_buffers[]) because
+/// GMS2 audio_create_buffer_sound holds a live reference — do not delete them.
 function scr_init_sounds() {
     var _r = 44100;  // sample rate
+    global.snd_buffers = [];  // keep buffers alive for the lifetime of the game
 
     // --- Click: bank tile selected (short, crisp tick) ---
     {
@@ -16,7 +19,7 @@ function scr_init_sounds() {
             buffer_write(_b, buffer_s16, clamp(round(_s), -32767, 32767));
         }
         global.snd_click = audio_create_buffer_sound(_b, buffer_s16, _r, 0, _n * 2, audio_mono);
-        buffer_delete(_b);
+        array_push(global.snd_buffers, _b);
     }
 
     // --- Place: tentative green guess placed (soft bell) ---
@@ -31,7 +34,7 @@ function scr_init_sounds() {
             buffer_write(_b, buffer_s16, clamp(round(_s), -32767, 32767));
         }
         global.snd_place = audio_create_buffer_sound(_b, buffer_s16, _r, 0, _n * 2, audio_mono);
-        buffer_delete(_b);
+        array_push(global.snd_buffers, _b);
     }
 
     // --- Lock: letter locked gold (punchy pluck) ---
@@ -46,7 +49,7 @@ function scr_init_sounds() {
             buffer_write(_b, buffer_s16, clamp(round(_s), -32767, 32767));
         }
         global.snd_lock = audio_create_buffer_sound(_b, buffer_s16, _r, 0, _n * 2, audio_mono);
-        buffer_delete(_b);
+        array_push(global.snd_buffers, _b);
     }
 
     // --- Clear: board cleared (descending glide) ---
@@ -64,7 +67,7 @@ function scr_init_sounds() {
             buffer_write(_b, buffer_s16, clamp(round(_s), -32767, 32767));
         }
         global.snd_clear = audio_create_buffer_sound(_b, buffer_s16, _r, 0, _n * 2, audio_mono);
-        buffer_delete(_b);
+        array_push(global.snd_buffers, _b);
     }
 
     // --- Hint: chime (two harmonics, slow bell) ---
@@ -80,7 +83,7 @@ function scr_init_sounds() {
             buffer_write(_b, buffer_s16, clamp(round(_s), -32767, 32767));
         }
         global.snd_hint = audio_create_buffer_sound(_b, buffer_s16, _r, 0, _n * 2, audio_mono);
-        buffer_delete(_b);
+        array_push(global.snd_buffers, _b);
     }
 
     // --- Win fanfare: C5-E5-G5-C6 arpeggio ---
@@ -104,6 +107,6 @@ function scr_init_sounds() {
             }
         }
         global.snd_win = audio_create_buffer_sound(_b, buffer_s16, _r, 0, _total_n * 2, audio_mono);
-        buffer_delete(_b);
+        array_push(global.snd_buffers, _b);
     }
 }
