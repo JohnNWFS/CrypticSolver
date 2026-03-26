@@ -2,7 +2,43 @@
 var visible_rows = floor((list_y2 - list_y1) / row_h);
 var scroll_max   = max(0, (total_puzzles - visible_rows) * row_h);
 
-// --- Scroll ---
+// --- Scrollbar geometry (must match Draw_0) ---
+var track_x  = list_x2 + 10;
+var track_y1 = list_y1;
+var track_y2 = list_y2;
+var thumb_h  = (scroll_max > 0) ? max(20, (visible_rows / total_puzzles) * (track_y2 - track_y1)) : (track_y2 - track_y1);
+var thumb_y  = (scroll_max > 0) ? track_y1 + (scroll_offset / scroll_max) * ((track_y2 - track_y1) - thumb_h) : track_y1;
+var sb_hit_x1 = track_x - 6;   // generous hit zone around the 6-px track
+var sb_hit_x2 = track_x + 12;
+
+// --- Scrollbar drag ---
+if (sb_dragging) {
+    if (mouse_check_button(mb_left)) {
+        var delta   = mouse_y - sb_drag_origin_y;
+        var px_per_scroll = (scroll_max > 0) ? ((track_y2 - track_y1) - thumb_h) / scroll_max : 1;
+        scroll_offset = clamp(sb_drag_origin_sc + delta / px_per_scroll, 0, scroll_max);
+    } else {
+        sb_dragging = false;
+    }
+}
+
+// --- Start scrollbar drag on click ---
+if (!sb_dragging && mouse_check_button_pressed(mb_left)
+ && mouse_x >= sb_hit_x1 && mouse_x <= sb_hit_x2
+ && mouse_y >= track_y1  && mouse_y <= track_y2) {
+    if (mouse_y >= thumb_y && mouse_y <= thumb_y + thumb_h) {
+        // Click on thumb — drag from here
+        sb_dragging       = true;
+        sb_drag_origin_y  = mouse_y;
+        sb_drag_origin_sc = scroll_offset;
+    } else {
+        // Click on track — jump to that position
+        var ratio = (mouse_y - track_y1 - thumb_h * 0.5) / ((track_y2 - track_y1) - thumb_h);
+        scroll_offset = clamp(ratio * scroll_max, 0, scroll_max);
+    }
+}
+
+// --- Mouse wheel ---
 if (mouse_wheel_up())   { scroll_offset = max(0,          scroll_offset - row_h); }
 if (mouse_wheel_down()) { scroll_offset = min(scroll_max, scroll_offset + row_h); }
 
@@ -10,8 +46,8 @@ if (mouse_wheel_down()) { scroll_offset = min(scroll_max, scroll_offset + row_h)
 if (keyboard_check_pressed(vk_up))   { scroll_offset = max(0,          scroll_offset - row_h); }
 if (keyboard_check_pressed(vk_down)) { scroll_offset = min(scroll_max, scroll_offset + row_h); }
 
-// --- Hover tracking ---
-if (mouse_y >= list_y1 && mouse_y < list_y2) {
+// --- Hover tracking (skip if over scrollbar) ---
+if (mouse_y >= list_y1 && mouse_y < list_y2 && mouse_x < sb_hit_x1) {
     var row_in_view = floor((mouse_y - list_y1) / row_h);
     hovered_row = row_in_view + floor(scroll_offset / row_h);
     if (hovered_row >= total_puzzles) { hovered_row = -1; }
@@ -50,8 +86,10 @@ for (_tbi = 0; _tbi < 2; _tbi++) {
     if (ts_btn_press[_tbi] > 0) ts_btn_press[_tbi]--;
 }
 
-// --- Select puzzle: left click OR Enter/Space on hovered row ---
-var select_by_click = mouse_check_button_pressed(mb_left)
+// --- Select puzzle: left click on list row (not scrollbar, not dragging) ---
+var select_by_click = !sb_dragging
+                   && mouse_check_button_pressed(mb_left)
+                   && mouse_x >= list_x1 && mouse_x < sb_hit_x1
                    && mouse_y >= list_y1 && mouse_y < list_y2;
 var select_by_key   = keyboard_check_pressed(vk_enter)
                    || keyboard_check_pressed(vk_space);

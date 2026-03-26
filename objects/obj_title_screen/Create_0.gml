@@ -24,3 +24,8 @@ ts_btn_hue   = [100, 210];
 ts_btn_sat   = [140, 80];
 ts_btn_hover = [false, false];
 ts_btn_press = [0, 0];
+
+// Scrollbar drag state
+sb_dragging       = false;
+sb_drag_origin_y  = 0;     // mouse y when drag started
+sb_drag_origin_sc = 0;     // scroll_offset when drag started
