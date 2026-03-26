@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"scr_draw_star",
+  "%Name":"scr_load_progress",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"scr_draw_star",
+  "name":"scr_load_progress",
   "parent":{
     "name":"Scripts",
     "path":"folders/Scripts.yy",

@@ -32,6 +32,22 @@ function scr_check_win() {
 		else if (_secs <= 120 * _diff) { global.win_stars = 2; }
 		else                           { global.win_stars = 1; }
 
+		// Save progress if this puzzle index is valid and it's a new best
+		var _pi = global.puzzle_index;
+		if (_pi >= 0 && _pi < 30) {
+			var _new_secs = global.puzzle_elapsed_ms / 1000;
+			var _prev_stars = global.save_stars[_pi];
+			var _prev_time  = global.save_times[_pi];
+			var _is_better  = (_prev_stars == 0)                                  // first time
+			               || (global.win_stars > _prev_stars)                    // more stars
+			               || (global.win_stars == _prev_stars && _new_secs < _prev_time); // same stars, faster
+			if (_is_better) {
+				global.save_stars[_pi] = global.win_stars;
+				global.save_times[_pi] = _new_secs;
+				scr_save_progress();
+			}
+		}
+
 		scr_show_popup("", "win");
 	}
 }

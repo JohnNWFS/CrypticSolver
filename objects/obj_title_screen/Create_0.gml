@@ -9,6 +9,9 @@ list_y2       = room_height - 66;
 // Ensure puzzle globals exist
 if (!variable_global_exists("puzzle_index")) { global.puzzle_index = -1; }
 
+// Load saved star ratings and best times
+scr_load_progress();
+
 // --- Inline action buttons drawn in Draw_0, clicked in Step_0 ---
 var _by = room_height - 40;
 ts_btn_cx    = [room_width / 2 - 56, room_width / 2 + 56];

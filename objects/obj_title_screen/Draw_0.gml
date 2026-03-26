@@ -58,22 +58,39 @@ for (i = start_row; i < min(total_puzzles, start_row + visible_rows + 1); i++) {
     draw_set_colour(c_white);
     draw_text(list_x1 + 10, ry + 5, "Puzzle  #" + string(i + 1));
 
-    // Difficulty label + star rating
+    // Difficulty label
     var diff_label;
     var diff_col;
     if (diff == 1) {
-        diff_label = "Easy     *";
+        diff_label = "Easy";
         diff_col   = make_colour_hsv(120, 180, 220);
     } else if (diff == 2) {
-        diff_label = "Medium  **";
+        diff_label = "Medium";
         diff_col   = make_colour_hsv(40, 200, 255);
     } else {
-        diff_label = "Hard    ***";
+        diff_label = "Hard";
         diff_col   = make_colour_hsv(0, 200, 230);
     }
     draw_set_halign(fa_right);
     draw_set_colour(diff_col);
-    draw_text(list_x2 - 10, ry + 5, diff_label);
+    draw_text(list_x2 - 76, ry + 5, diff_label);
+
+    // Earned stars (3 small drawn stars)
+    var _earned = variable_global_exists("save_stars") ? global.save_stars[i] : 0;
+    var _star_r  = 5;
+    var _star_gap = 14;
+    var _star_x0  = list_x2 - 56;
+    var _star_y   = ry + row_h * 0.5;
+    var _si;
+    for (_si = 0; _si < 3; _si++) {
+        var _filled = (_si < _earned);
+        var _scol   = _filled
+                      ? make_colour_hsv(42, 220, 255)   // gold
+                      : make_colour_hsv(0,   0,   70);  // dark empty
+        draw_set_alpha(_filled ? 1.0 : 0.45);
+        scr_draw_star(_star_x0 + _si * _star_gap, _star_y, _star_r, _filled, _scol);
+    }
+    draw_set_alpha(1);
 }
 
 // --- Bottom action buttons ---
