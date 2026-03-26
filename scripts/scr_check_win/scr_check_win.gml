@@ -56,6 +56,7 @@ function scr_check_win() {
 			}
 		}
 
+		audio_play_sound(global.snd_win, 1, false);
 		scr_show_popup("", "win");
 	}
 }

@@ -38,6 +38,7 @@ function scr_use_hint() {
     }
 
     global.hints_remaining--;
+    audio_play_sound(global.snd_hint, 1, false);
     scr_update_bank_dimming();
     with (global.game_control_id) { scr_check_win(); }
 }

@@ -3,6 +3,7 @@
 
 // --- Clear button: wipe every non-hinted guess off the board ---
 if (is_clear_button) {
+    audio_play_sound(global.snd_clear, 1, false);
     with (obj_tile_beginner) {
         if (is_guess_tile && !is_hinted) {
             guessed_index = -1;
@@ -51,6 +52,7 @@ if (is_bank_tile) {
         global.selected_letter  = letter_index;
         global.selected_bank_id = id;
         image_blend = make_colour_hsv(40, 220, 255);  // gold highlight
+        audio_play_sound(global.snd_click, 1, false);
     }
     exit;
 }
@@ -76,6 +78,7 @@ if (is_guess_tile) {
                 }
             }
         }
+        audio_play_sound(new_locked ? global.snd_lock : global.snd_place, 1, false);
     } else {
         // Different letter — check it isn't already locked on another encrypted group
         global._lock_check = false;
@@ -99,6 +102,7 @@ if (is_guess_tile) {
                 image_blend   = make_colour_hsv(120, 150, 220);  // green = tentative
             }
         }
+        audio_play_sound(global.snd_place, 1, false);
     }
 
     scr_update_bank_dimming();
