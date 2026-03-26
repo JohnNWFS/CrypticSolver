@@ -62,11 +62,23 @@ if (popup_type == "win") {
     draw_line(_px + 24, _py + 62, _px + _pw - 24, _py + 62);
     draw_set_alpha(popup_alpha);
 
-    // Solved phrase
+    // Solved phrase — rebuild from 28-col rows, trimming padding so words don't run together
+    var _cols = 28;
+    var _rows = 5;
+    var _disp = "";
+    var _r;
+    for (_r = 0; _r < _rows; _r++) {
+        var _row = string_copy(global.plain_phrase, _r * _cols + 1, _cols);
+        while (string_length(_row) > 0 && string_char_at(_row, string_length(_row)) == " ") {
+            _row = string_copy(_row, 1, string_length(_row) - 1);
+        }
+        if (_disp != "" && _row != "") { _disp += " "; }
+        _disp += _row;
+    }
     draw_set_font(-1);
     draw_set_colour(c_white);
     draw_set_alpha(popup_alpha * 0.92);
-    draw_text_ext(_gw * 0.5, _py + 94, global.plain_phrase, -1, _pw - 48);
+    draw_text_ext(_gw * 0.5, _py + 94, _disp, -1, _pw - 48);
 
     // Time taken
     var _tsecs = floor(global.puzzle_elapsed_ms / 1000);
