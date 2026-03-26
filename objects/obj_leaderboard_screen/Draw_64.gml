@@ -180,7 +180,7 @@ if (detail_puzzle >= 0) {
 
 // ---- Back button ----
 var _back_cx = cx;
-var _back_cy = room_height - 28;
+var _back_cy = room_height - 60;
 var _back_hw = 60;  var _back_hh = 14;
 var _back_hover = (mouse_x >= _back_cx - _back_hw && mouse_x <= _back_cx + _back_hw
                 && mouse_y >= _back_cy - _back_hh && mouse_y <= _back_cy + _back_hh);
