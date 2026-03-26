@@ -45,6 +45,7 @@
   "resources":[
     {"id":{"name":"fnt_script_1","path":"fonts/fnt_script_1/fnt_script_1.yy",},},
     {"id":{"name":"fnt_script","path":"fonts/fnt_script/fnt_script.yy",},},
+    {"id":{"name":"fnt_symbol","path":"fonts/fnt_symbol/fnt_symbol.yy",},},
     {"id":{"name":"compatibility_report_230326_190925925","path":"notes/compatibility_report_230326_190925925/compatibility_report_230326_190925925.yy",},},
     {"id":{"name":"notes","path":"notes/notes/notes.yy",},},
     {"id":{"name":"obj_about_screen","path":"objects/obj_about_screen/obj_about_screen.yy",},},
@@ -65,6 +66,7 @@
     {"id":{"name":"object_get_depth","path":"scripts/object_get_depth/object_get_depth.yy",},},
     {"id":{"name":"scr_build_cipher","path":"scripts/scr_build_cipher/scr_build_cipher.yy",},},
     {"id":{"name":"scr_check_win","path":"scripts/scr_check_win/scr_check_win.yy",},},
+    {"id":{"name":"scr_draw_star","path":"scripts/scr_draw_star/scr_draw_star.yy",},},
     {"id":{"name":"scr_encrypt_phrase","path":"scripts/scr_encrypt_phrase/scr_encrypt_phrase.yy",},},
     {"id":{"name":"scr_pick_a_phrase","path":"scripts/scr_pick_a_phrase/scr_pick_a_phrase.yy",},},
     {"id":{"name":"scr_show_popup","path":"scripts/scr_show_popup/scr_show_popup.yy",},},

@@ -22,6 +22,7 @@
   ],
   "ResourceOrderSettings":[
     {"name":"fnt_script_1","order":1,"path":"fonts/fnt_script_1/fnt_script_1.yy",},
+    {"name":"fnt_symbol","order":2,"path":"fonts/fnt_symbol/fnt_symbol.yy",},
     {"name":"compatibility_report_230326_190925925","order":1,"path":"notes/compatibility_report_230326_190925925/compatibility_report_230326_190925925.yy",},
     {"name":"obj_select_tile","order":1,"path":"objects/obj_select_tile/obj_select_tile.yy",},
     {"name":"obj_tile","order":2,"path":"objects/obj_tile/obj_tile.yy",},

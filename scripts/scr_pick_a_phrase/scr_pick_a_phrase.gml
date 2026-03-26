@@ -11,7 +11,7 @@ function scr_pick_a_phrase() {
 	// ---------------------------------------------------------------
 	var pack = [
 		// --- Easy ---
-		"BETTER LATE THAN NEVER",
+		"AAAAAA",//"BETTER LATE THAN NEVER",
 		"FORTUNE FAVOURS THE BRAVE",
 		"LAUGHTER IS THE BEST MEDICINE",
 		"ACTIONS SPEAK LOUDER THAN WORDS",

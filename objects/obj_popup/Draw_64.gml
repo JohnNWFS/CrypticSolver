@@ -49,11 +49,12 @@ if (popup_type == "win") {
     draw_roundrect(_px, _py, _px + _pw, _py + _ph, true);
 
     // Header text
-    draw_set_font(fnt_script_1);
+  
+	draw_set_font(fnt_script);
     draw_set_halign(fa_center);
     draw_set_valign(fa_middle);
     draw_set_colour(_gold);
-    draw_text(_gw * 0.5, _py + 38, "☀   PUZZLE  SOLVED   ☀");
+	draw_text(_gw * 0.5, _py + 48,"*    PUZZLE  SOLVED    *");	
 
     // Divider
     draw_set_colour(make_colour_hsv(40, 160, 180));
@@ -65,7 +66,7 @@ if (popup_type == "win") {
     draw_set_font(-1);
     draw_set_colour(c_white);
     draw_set_alpha(popup_alpha * 0.92);
-    draw_text_ext(_gw * 0.5, _py + 78, "\"" + global.plain_phrase + "\"", -1, _pw - 48);
+    draw_text_ext(_gw * 0.5, _py + 94, global.plain_phrase, -1, _pw - 48);
 
     // Time taken
     var _tsecs = floor(global.puzzle_elapsed_ms / 1000);
@@ -73,16 +74,34 @@ if (popup_type == "win") {
     var _tss   = _tsecs mod 60;
     var _tstr  = string(_tmm) + ":" + ((_tss < 10) ? "0" : "") + string(_tss);
 
-    // Earned stars (speed rating)
-    var _earned = "";
-    var _e;
-    for (_e = 0; _e < global.win_stars; _e++)          { _earned += "★"; }
-    for (_e = global.win_stars; _e < 3; _e++)          { _earned += "☆"; }
-
+    // Puzzle title + time (centred, left of stars)
     draw_set_font(fnt_script);
+    draw_set_halign(fa_center);
+    draw_set_valign(fa_middle);
     draw_set_colour(make_colour_hsv(40, 200, 255));
     draw_set_alpha(popup_alpha * 0.85);
-    draw_text(_gw * 0.5, _py + _ph - 24, global.puzzle_title + "   " + _tstr + "   " + _earned);
+    draw_text(_gw * 0.5 - 48, _py + _ph - 22, global.puzzle_title + "   " + _tstr);
+
+    // Drawn stars (3 total, filled up to win_stars)
+    var _sr   = 9;                     // outer radius
+    var _sgap = 24;                    // centre-to-centre gap
+    var _sx0  = _gw * 0.5 + 52;       // x of first star
+    var _sy   = _py + _ph - 22;
+    var _e;
+    for (_e = 0; _e < 3; _e++) {
+        var _scx   = _sx0 + _e * _sgap;
+        var _sfill = (_e < global.win_stars);
+        var _scol  = _sfill
+                     ? make_colour_hsv(40 + _shim * 12, 230, 255)   // gold fill
+                     : make_colour_hsv(40,               60,  140);  // dim outline
+        draw_set_alpha(_sfill ? popup_alpha : popup_alpha * 0.5);
+        scr_draw_star(_scx, _sy, _sr, _sfill, _scol);
+        // outline ring on filled stars for crispness
+        if (_sfill) {
+            draw_set_alpha(popup_alpha * 0.6);
+            scr_draw_star(_scx, _sy, _sr, false, make_colour_hsv(45, 180, 200));
+        }
+    }
 
     // Buttons
     var _bw     = 140;
