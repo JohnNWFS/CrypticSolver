@@ -37,6 +37,9 @@ function scr_check_win() {
 
 		global.win_stars = min(global.win_stars, _max_stars);
 
+		// Ensure save arrays exist (guard against bypassing title screen)
+		if (!variable_global_exists("save_stars")) { scr_load_progress(); }
+
 		// Save progress if this puzzle index is valid and it's a new best
 		var _pi = global.puzzle_index;
 		if (_pi >= 0 && _pi < 30) {
