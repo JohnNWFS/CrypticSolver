@@ -73,11 +73,13 @@ if (detail_state == "loading" && global.lb_win_state == "ready") {
 }
 
 // ---- Back button / Escape ----
-var _back_cx = room_width * 0.5;
-var _back_cy = room_height - 60;
+var _gmx = device_mouse_x_to_gui(0);
+var _gmy = device_mouse_y_to_gui(0);
+var _back_cx = display_get_gui_width() * 0.5;
+var _back_cy = display_get_gui_height() - 60;
 var _back_hw = 60;  var _back_hh = 14;
-var _back_hover = (mouse_x >= _back_cx - _back_hw && mouse_x <= _back_cx + _back_hw
-                && mouse_y >= _back_cy - _back_hh && mouse_y <= _back_cy + _back_hh);
+var _back_hover = (_gmx >= _back_cx - _back_hw && _gmx <= _back_cx + _back_hw
+                && _gmy >= _back_cy - _back_hh && _gmy <= _back_cy + _back_hh);
 if ((_back_hover && mouse_check_button_pressed(mb_left))
  || keyboard_check_pressed(vk_escape)) {
     room_goto(rm_title);
