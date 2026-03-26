@@ -1,0 +1,84 @@
+/// @description Leaderboard screen input — scroll, back, puzzle detail.
+var _total_rows = PUZZLE_TOTAL;
+var visible_rows = floor((list_y2 - list_y1) / row_h);
+var scroll_max   = max(0, (_total_rows - visible_rows) * row_h);
+
+// ---- Scrollbar geometry ----
+var track_x  = list_x2 + 10;
+var track_y1 = list_y1;
+var track_y2 = list_y2;
+var thumb_h  = (scroll_max > 0) ? max(20, (visible_rows / _total_rows) * (track_y2 - track_y1)) : (track_y2 - track_y1);
+var thumb_y  = (scroll_max > 0) ? track_y1 + (scroll_offset / scroll_max) * ((track_y2 - track_y1) - thumb_h) : track_y1;
+var sb_hit_x1 = track_x - 6;
+var sb_hit_x2 = track_x + 12;
+
+// ---- Scrollbar drag ----
+if (sb_dragging) {
+    if (mouse_check_button(mb_left)) {
+        var delta = mouse_y - sb_drag_origin_y;
+        var px_per_scroll = (scroll_max > 0) ? ((track_y2 - track_y1) - thumb_h) / scroll_max : 1;
+        scroll_offset = clamp(sb_drag_origin_sc + delta / px_per_scroll, 0, scroll_max);
+    } else {
+        sb_dragging = false;
+    }
+}
+
+if (!sb_dragging && mouse_check_button_pressed(mb_left)
+ && mouse_x >= sb_hit_x1 && mouse_x <= sb_hit_x2
+ && mouse_y >= track_y1  && mouse_y <= track_y2) {
+    if (mouse_y >= thumb_y && mouse_y <= thumb_y + thumb_h) {
+        sb_dragging = true;
+        sb_drag_origin_y  = mouse_y;
+        sb_drag_origin_sc = scroll_offset;
+    } else {
+        var ratio = (mouse_y - track_y1 - thumb_h * 0.5) / ((track_y2 - track_y1) - thumb_h);
+        scroll_offset = clamp(ratio * scroll_max, 0, scroll_max);
+    }
+}
+
+// ---- Mouse wheel / keys ----
+if (mouse_wheel_up())               { scroll_offset = max(0,          scroll_offset - row_h); }
+if (mouse_wheel_down())             { scroll_offset = min(scroll_max, scroll_offset + row_h); }
+if (keyboard_check_pressed(vk_up))   { scroll_offset = max(0,          scroll_offset - row_h); }
+if (keyboard_check_pressed(vk_down)) { scroll_offset = min(scroll_max, scroll_offset + row_h); }
+
+// ---- Click a puzzle row → fetch its top 10 ----
+var row_click = !sb_dragging
+             && mouse_check_button_pressed(mb_left)
+             && mouse_x >= list_x1 && mouse_x < sb_hit_x1
+             && mouse_y >= list_y1 && mouse_y < list_y2;
+if (row_click) {
+    var _row_in_view = floor((mouse_y - list_y1) / row_h);
+    var _clicked_row = _row_in_view + floor(scroll_offset / row_h);
+    if (_clicked_row >= 0 && _clicked_row < PUZZLE_TOTAL) {
+        detail_puzzle   = _clicked_row;
+        detail_state    = "loading";
+        detail_fetch_id = scr_fetch_leaderboard(_clicked_row);
+        // Store fetch id separately so async handler can find it
+        global.lb_win_puzzle   = _clicked_row;
+        global.lb_win_state    = "loading";
+        global.lb_win_fetch_id = detail_fetch_id;
+    }
+}
+
+// ---- Detail panel data arrival ----
+if (detail_state == "loading" && global.lb_win_state == "ready") {
+    var _pidx = global.lb_win_puzzle;
+    if (!is_undefined(global.lb_data[_pidx])) {
+        detail_scores = global.lb_data[_pidx];
+    } else {
+        detail_scores = [];
+    }
+    detail_state = "ready";
+}
+
+// ---- Back button / Escape ----
+var _back_cx = room_width * 0.5;
+var _back_cy = room_height - 28;
+var _back_hw = 60;  var _back_hh = 14;
+var _back_hover = (mouse_x >= _back_cx - _back_hw && mouse_x <= _back_cx + _back_hw
+                && mouse_y >= _back_cy - _back_hh && mouse_y <= _back_cy + _back_hh);
+if ((_back_hover && mouse_check_button_pressed(mb_left))
+ || keyboard_check_pressed(vk_escape)) {
+    room_goto(rm_title);
+}

@@ -15,6 +15,26 @@ global.hints_remaining   = 3;
 // --- Sound effects (generated once per game session) ---
 if (!variable_global_exists("snd_click")) { scr_init_sounds(); }
 
+// --- Leaderboard globals (persist across rooms) ---
+if (!variable_global_exists("lb_data")) {
+    global.lb_data         = array_create(PUZZLE_TOTAL);   // top-10 arrays per puzzle
+    var _i;
+    for (_i = 0; _i < PUZZLE_TOTAL; _i++) { global.lb_data[_i] = undefined; }
+    global.lb_win_fetch_id    = -1;
+    global.lb_win_puzzle      = -1;
+    global.lb_win_state       = "idle";   // "idle"|"loading"|"ready"|"error"
+    global.lb_submit_id       = -1;
+    global.lb_submit_state    = "idle";   // "idle"|"pending"|"success"|"error"
+    global.lb_submit_rank     = 0;
+    global.lb_ticker_fetch_id = -1;
+    global.lb_ticker_state    = "idle";
+    global.lb_ticker_scores   = [];
+    global.lb_all_fetch_id    = -1;
+    global.lb_all_state       = "idle";
+    global.lb_all_scores      = [];
+    global.player_name        = "";       // loaded from ini in scr_load_progress
+}
+
 // --- Puzzle timer ---
 global.puzzle_start_time = current_time;   // milliseconds since game start
 global.puzzle_elapsed_ms = 0;

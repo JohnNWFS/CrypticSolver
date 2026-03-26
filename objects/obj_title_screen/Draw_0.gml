@@ -151,16 +151,120 @@ if (scroll_max > 0) {
     draw_rectangle(track_x, thumb_y, track_x + 6, thumb_y + thumb_h, false);
 }
 
-// --- Footer ---
+// --- Footer divider ---
 draw_set_halign(fa_center);
 draw_set_colour(make_colour_hsv(0, 0, 130));
 draw_set_alpha(0.8);
 draw_line(80, list_y2 + 2, room_width - 80, list_y2 + 2);
-draw_set_alpha(0.7);
-draw_text(cx, list_y2 + 46, "F1 = instructions   |   F3 = toggle letter style");
+
+// --- Ticker (recent leaderboard scores) ---
+var _tc = array_length(global.lb_ticker_scores);
+if (_tc > 0) {
+    var _ti  = ticker_idx mod _tc;
+    var _tsc = global.lb_ticker_scores[_ti];
+    var _tstr = "  Puzzle #" + string(_tsc.puzzle_index + 1)
+              + "  —  " + _tsc.name
+              + "  " + scr_format_time(_tsc.time_seconds) + "  ";
+    draw_set_alpha(ticker_alpha * 0.75);
+    draw_set_colour(make_colour_hsv(40, 120, 200));
+    draw_text(cx, list_y2 + 14, _tstr);
+    // tiny stars inline
+    var _tsx = cx + string_width(_tstr) * 0.5 - string_width("  ") + 6;
+    var _si2;
+    for (_si2 = 0; _si2 < 3; _si2++) {
+        var _sfill2 = (_si2 < _tsc.stars);
+        draw_set_alpha(ticker_alpha * (_sfill2 ? 0.9 : 0.25));
+        scr_draw_star(_tsx - 44 + _si2 * 12, list_y2 + 14, 4, _sfill2, make_colour_hsv(40, 220, 255));
+    }
+    draw_set_alpha(0.7);
+} else {
+    draw_set_alpha(0.35);
+    draw_set_colour(make_colour_hsv(0, 0, 120));
+    draw_text(cx, list_y2 + 14, "No leaderboard scores yet — be the first!");
+}
+
+// Footer hint
+draw_set_alpha(0.55);
+draw_set_colour(make_colour_hsv(0, 0, 130));
+draw_text(cx, list_y2 + 32, "F1 = instructions   |   F3 = toggle letter style");
+
+// --- Leaderboard button (bottom-right) ---
+var _lb_cx = room_width - 80;
+var _lb_cy = room_height - 40;
+var _lb_fv  = lb_btn_hover ? 190 : 150;
+draw_set_alpha(0.85);
+draw_set_colour(make_colour_hsv(40, 160, _lb_fv));
+draw_roundrect(_lb_cx - 56, _lb_cy - 12, _lb_cx + 56, _lb_cy + 12, false);
+draw_set_colour(make_colour_hsv(40, 220, max(_lb_fv - 50, 20)));
+draw_roundrect(_lb_cx - 56, _lb_cy - 12, _lb_cx + 56, _lb_cy + 12, true);
+draw_set_alpha(1);
+draw_set_font(fnt_script);
+draw_set_halign(fa_center);
+draw_set_valign(fa_middle);
+draw_set_colour(c_white);
+draw_text(_lb_cx, _lb_cy, "LEADERBOARD");
+
+// --- Name button (bottom-left) ---
+var _nm_cx = 70;
+var _nm_cy = room_height - 40;
+var _nm_hover = (mouse_x >= _nm_cx - 56 && mouse_x <= _nm_cx + 56
+              && mouse_y >= _nm_cy - 12 && mouse_y <= _nm_cy + 12);
+var _nm_fv = _nm_hover ? 150 : 110;
+var _stored_name = variable_global_exists("player_name") ? global.player_name : "";
+draw_set_alpha(0.75);
+draw_set_colour(make_colour_hsv(210, 80, _nm_fv));
+draw_roundrect(_nm_cx - 56, _nm_cy - 12, _nm_cx + 56, _nm_cy + 12, false);
+draw_set_colour(make_colour_hsv(210, 140, max(_nm_fv - 40, 20)));
+draw_roundrect(_nm_cx - 56, _nm_cy - 12, _nm_cx + 56, _nm_cy + 12, true);
+draw_set_alpha(1);
+draw_set_font(-1);
+draw_set_colour(_stored_name != "" ? make_colour_hsv(40, 160, 220) : make_colour_hsv(0, 0, 140));
+draw_text(_nm_cx, _nm_cy, _stored_name != "" ? _stored_name : "Set name");
+
+// ---- Name input overlay ----
+if (name_overlay) {
+    draw_set_alpha(0.7);
+    draw_set_colour(c_black);
+    draw_rectangle(0, 0, room_width, room_height, false);
+    draw_set_alpha(1);
+
+    var _ox = cx - 180;  var _ow = 360;
+    var _oy = room_height * 0.5 - 44;  var _oh = 88;
+    draw_set_colour(make_colour_hsv(38, 120, 35));
+    draw_roundrect(_ox, _oy, _ox + _ow, _oy + _oh, false);
+    draw_set_colour(make_colour_hsv(40, 200, 200));
+    draw_roundrect(_ox, _oy, _ox + _ow, _oy + _oh, true);
+
+    draw_set_font(fnt_script);
+    draw_set_halign(fa_center);
+    draw_set_valign(fa_middle);
+    draw_set_colour(make_colour_hsv(40, 200, 255));
+    draw_text(cx, _oy + 16, "Your name for the leaderboard:");
+
+    // Input box
+    draw_set_colour(make_colour_hsv(0, 0, 15));
+    draw_set_alpha(0.8);
+    draw_rectangle(_ox + 12, _oy + 32, _ox + _ow - 12, _oy + 56, false);
+    draw_set_colour(make_colour_hsv(40, 150, 180));
+    draw_set_alpha(1);
+    draw_rectangle(_ox + 12, _oy + 32, _ox + _ow - 12, _oy + 56, true);
+    draw_set_font(-1);
+    draw_set_colour(c_white);
+    draw_set_halign(fa_left);
+    draw_set_valign(fa_middle);
+    var _cursor2 = ((name_input_cursor div 30) mod 2 == 0) ? "|" : "";
+    draw_text(_ox + 18, _oy + 44, name_input + _cursor2);
+
+    draw_set_font(-1);
+    draw_set_colour(make_colour_hsv(0, 0, 140));
+    draw_set_alpha(0.7);
+    draw_set_halign(fa_center);
+    draw_text(cx, _oy + 70, "Enter or Esc to confirm  (blank = Anonymous)");
+}
 
 // Reset draw state
 draw_set_alpha(1);
 draw_set_colour(c_white);
 draw_set_halign(fa_left);
 draw_set_valign(fa_top);
+draw_set_font(-1);

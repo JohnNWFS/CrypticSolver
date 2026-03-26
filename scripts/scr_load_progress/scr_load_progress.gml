@@ -10,5 +10,6 @@ function scr_load_progress() {
         global.save_stars[i] = ini_read_real("progress", "stars_" + string(i), 0);
         global.save_times[i] = ini_read_real("progress", "time_"  + string(i), 0);
     }
+    global.player_name = ini_read_string("player", "name", "");
     ini_close();
 }

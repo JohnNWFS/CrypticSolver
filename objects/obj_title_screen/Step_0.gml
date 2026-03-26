@@ -55,6 +55,57 @@ if (mouse_y >= list_y1 && mouse_y < list_y2 && mouse_x < sb_hit_x1) {
     hovered_row = -1;
 }
 
+// ---- Ticker advance ----
+ticker_timer++;
+if (ticker_timer >= TICKER_INTERVAL) {
+    ticker_timer = 0;
+    var _tc = array_length(global.lb_ticker_scores);
+    if (_tc > 0) { ticker_idx = (ticker_idx + 1) mod _tc; }
+    ticker_alpha = 0;
+}
+if (ticker_alpha < 1) { ticker_alpha = min(1, ticker_alpha + 0.05); }
+
+// ---- Name input overlay ----
+if (name_overlay) {
+    name_input_cursor++;
+    if (keyboard_check_pressed(vk_backspace) && string_length(name_input) > 0) {
+        name_input = string_copy(name_input, 1, string_length(name_input) - 1);
+        keyboard_string = "";
+    }
+    if (keyboard_string != "") {
+        name_input   = string_copy(name_input + keyboard_string, 1, 20);
+        keyboard_string = "";
+    }
+    if (keyboard_check_pressed(vk_return) || keyboard_check_pressed(vk_escape)) {
+        global.player_name = name_input;
+        scr_save_progress();
+        name_overlay = false;
+        keyboard_string = "";
+    }
+    exit;   // block all other input while overlay is open
+}
+
+// ---- Leaderboard button ----
+var _lb_cx = room_width - 80;
+var _lb_cy = room_height - 40;
+lb_btn_hover = (mouse_x >= _lb_cx - 56 && mouse_x <= _lb_cx + 56
+             && mouse_y >= _lb_cy - 12 && mouse_y <= _lb_cy + 12);
+if (lb_btn_hover && mouse_check_button_pressed(mb_left)) {
+    room_goto(rm_leaderboard);
+}
+
+// ---- Name button (bottom-left) ----
+var _nm_cx = 70;
+var _nm_cy = room_height - 40;
+var _nm_hover = (mouse_x >= _nm_cx - 56 && mouse_x <= _nm_cx + 56
+              && mouse_y >= _nm_cy - 12 && mouse_y <= _nm_cy + 12);
+if (_nm_hover && mouse_check_button_pressed(mb_left)) {
+    name_overlay    = true;
+    name_input      = (variable_global_exists("player_name") ? global.player_name : "");
+    name_input_cursor = 0;
+    keyboard_string = "";
+}
+
 // F3 toggles font style — persists into the game
 if (keyboard_check_pressed(vk_f3)) {
     if (!variable_global_exists("font_index")) { global.font_index = 0; }

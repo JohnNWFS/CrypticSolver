@@ -29,5 +29,26 @@ ts_btn_press = [0, 0];
 
 // Scrollbar drag state
 sb_dragging       = false;
-sb_drag_origin_y  = 0;     // mouse y when drag started
-sb_drag_origin_sc = 0;     // scroll_offset when drag started
+sb_drag_origin_y  = 0;
+sb_drag_origin_sc = 0;
+
+// Leaderboard button (bottom-right area)
+lb_btn_hover  = false;
+
+// Ticker state
+ticker_idx    = 0;     // which ticker entry is currently shown
+ticker_timer  = 0;     // counts up; advances entry at TICKER_INTERVAL
+ticker_alpha  = 1;     // for fade transition
+#macro TICKER_INTERVAL 180   // steps between ticker advances
+
+// Name input overlay
+name_overlay   = false;    // is the name entry overlay open?
+name_input     = (variable_global_exists("player_name") ? global.player_name : "");
+name_input_cursor = 0;
+
+// Kick off ticker fetch
+if (global.lb_ticker_state != "ready") {
+    global.lb_ticker_state    = "loading";
+    global.lb_ticker_fetch_id = scr_fetch_leaderboard(-1);
+}
+keyboard_string = "";
