@@ -4,7 +4,7 @@ row_h         = 22;
 list_x1       = 60;
 list_x2       = room_width - 60;
 list_y1       = 80;
-list_y2       = room_height - 56;
+list_y2       = room_height - 100;
 
 // Detail panel: shows top 10 for a clicked puzzle
 detail_puzzle  = -1;   // -1 = no puzzle selected
