@@ -46,8 +46,27 @@ name_overlay   = false;    // is the name entry overlay open?
 name_input     = (variable_global_exists("player_name") ? global.player_name : "");
 name_input_cursor = 0;
 
+// Ensure lb globals exist (obj_game_control may not have run yet)
+if (!variable_global_exists("lb_ticker_state"))    { global.lb_ticker_state    = "idle"; }
+if (!variable_global_exists("lb_ticker_fetch_id")) { global.lb_ticker_fetch_id = -1; }
+if (!variable_global_exists("lb_ticker_scores"))   { global.lb_ticker_scores   = []; }
+if (!variable_global_exists("lb_all_state"))       { global.lb_all_state       = "idle"; }
+if (!variable_global_exists("lb_all_fetch_id"))    { global.lb_all_fetch_id    = -1; }
+if (!variable_global_exists("lb_all_scores"))      { global.lb_all_scores      = []; }
+if (!variable_global_exists("lb_win_state"))       { global.lb_win_state       = "idle"; }
+if (!variable_global_exists("lb_win_fetch_id"))    { global.lb_win_fetch_id    = -1; }
+if (!variable_global_exists("lb_win_puzzle"))      { global.lb_win_puzzle      = -1; }
+if (!variable_global_exists("lb_submit_state"))    { global.lb_submit_state    = "idle"; }
+if (!variable_global_exists("lb_submit_id"))       { global.lb_submit_id       = -1; }
+if (!variable_global_exists("lb_submit_rank"))     { global.lb_submit_rank     = 0; }
+if (!variable_global_exists("lb_data")) {
+    global.lb_data = array_create(PUZZLE_TOTAL);
+    var _i;
+    for (_i = 0; _i < PUZZLE_TOTAL; _i++) { global.lb_data[_i] = undefined; }
+}
+
 // Kick off ticker fetch
-if (global.lb_ticker_state != "ready") {
+if (global.lb_ticker_state != "ready" && global.lb_ticker_state != "loading") {
     global.lb_ticker_state    = "loading";
     global.lb_ticker_fetch_id = scr_fetch_leaderboard(-1);
 }
