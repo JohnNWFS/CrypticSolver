@@ -80,13 +80,13 @@ if (is_guess_tile) {
         // Different letter — check it isn't already locked on another encrypted group
         global._lock_check = false;
         with (obj_tile_beginner) {
-            if (is_guess_tile && enc_index != clicked_enc && guessed_index == clicked_letter && is_locked) {
+            if (is_guess_tile && enc_index != clicked_enc && guessed_index == clicked_letter) {
                 global._lock_check = true;
                 break;
             }
         }
         if (global._lock_check) {
-            scr_show_popup(chr(clicked_letter + 65) + " is already locked in elsewhere.\nRight-click those tiles to free it first.", "error");
+            scr_show_popup(chr(clicked_letter + 65) + " is already in use elsewhere.\nRight-click those tiles to clear it first.", "error");
             exit;
         }
 
