@@ -20,8 +20,6 @@ draw_line(80, 90, room_width - 80, 90);
 draw_set_alpha(1);
 
 // --- Puzzle list ---
-var list_x1  = 80;
-var list_x2  = room_width - 80;
 var start_row    = floor(scroll_offset / row_h);
 var visible_rows = floor((list_y2 - list_y1) / row_h);
 
