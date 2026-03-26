@@ -14,7 +14,7 @@ draw_text(cx, _y, "=  C R Y P T I C   S O L V E R  =");
 _y += lh + 4;
 
 draw_set_colour(make_colour_hsv(0, 0, 180));
-draw_line(lx, y, room_width - lx, y);
+draw_line(lx, _y, room_width - lx, _y);
 _y += 8;
 
 // ---------------------------------------------------------------
@@ -73,25 +73,25 @@ var ctrl_key = [
     "Middle-click puzzle tile",
     "Drag from bank to puzzle",
     "A - Z keys",
-    "Escape",
-    "R key",
     "CLR button",
-    "H key (title screen)",
-    "F key (anywhere)",
+    "F1",
+    "F2",
+    "F3",
+    "Escape",
 ];
 var ctrl_desc = [
     "Select / deselect that letter",
-    "Place your selected guess",
+    "Place your selected guess (green)",
     "Lock (gold) / unlock guess",
     "Clear all guesses for that letter",
     "Lock tile and select letter in bank",
-    "Drop letter locked onto tile",
-    "Select that letter from keyboard",
-    "Deselect current letter",
-    "New random puzzle",
+    "Drop and lock letter onto tile",
+    "Quick-select that letter",
     "Clear all guesses on the board",
-    "Show this help screen",
-    "Toggle hand-drawn / script font letters",
+    "Use a hint (reveals one letter group)",
+    "New puzzle",
+    "Toggle letter font style",
+    "Return to main menu",
 ];
 var ci;
 for (ci = 0; ci < array_length(ctrl_key); ci++) {
@@ -131,7 +131,7 @@ draw_line(lx, room_height - 34, room_width - lx, room_height - 34);
 
 draw_set_halign(fa_center);
 draw_set_colour(make_colour_hsv(40, 180, 220));
-draw_text(cx, room_height - 26, "[ Escape  or  Backspace  or  click here  to return to the menu ]");
+draw_text(cx, room_height - 26, "[ Escape  or  Backspace  to return to the menu ]");
 
 // Reset draw state
 draw_set_alpha(1);

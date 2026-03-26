@@ -11,4 +11,5 @@ with (obj_tile_beginner) {
         image_blend   = c_white;
     }
 }
+audio_play_sound(global.snd_clear, 1, false);
 scr_update_bank_dimming();
