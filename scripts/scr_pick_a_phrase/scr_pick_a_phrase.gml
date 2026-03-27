@@ -17,7 +17,7 @@ function scr_pick_a_phrase() {
 	// ---------------------------------------------------------------
 	var pack = [
 		// ===================== EASY (0-29) =====================
-		"AAAAAA",                                                           // 0  (test — replace when ready)
+		"KEEP CALM AND CARRY ON",                                           // 0
 		"FORTUNE FAVOURS THE BRAVE",                                        // 1
 		"LAUGHTER IS THE BEST MEDICINE",                                    // 2
 		"ACTIONS SPEAK LOUDER THAN WORDS",                                  // 3
