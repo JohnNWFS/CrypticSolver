@@ -3,9 +3,9 @@ var _total_rows = PUZZLE_TOTAL;
 var visible_rows = floor((list_y2 - list_y1) / row_h);
 var scroll_max   = max(0, (_total_rows - visible_rows) * row_h);
 
-// GUI mouse coordinates (all draw positions are in GUI space via Draw_64)
-var _mx = device_mouse_x_to_gui(0);
-var _my = device_mouse_y_to_gui(0);
+// Room mouse coordinates — mouse_x/y correctly account for CSS canvas scaling in HTML5
+var _mx = mouse_x;
+var _my = mouse_y;
 
 // ---- Scrollbar geometry ----
 var track_x  = list_x2 + 10;
