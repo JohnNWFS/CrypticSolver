@@ -88,7 +88,7 @@ if (name_overlay) {
 // ---- Leaderboard button ----
 var _lb_cx = room_width - 80;
 var _lb_cy = room_height - 40;
-lb_btn_hover = (mouse_x >= _lb_cx - 56 && mouse_x <= _lb_cx + 56
+lb_btn_hover = (mouse_x >= _lb_cx - 76 && mouse_x <= _lb_cx + 76
              && mouse_y >= _lb_cy - 12 && mouse_y <= _lb_cy + 12);
 if (lb_btn_hover && mouse_check_button_pressed(mb_left)) {
     room_goto(rm_leaderboard);

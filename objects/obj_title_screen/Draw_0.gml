@@ -27,7 +27,7 @@ var visible_rows = floor((list_y2 - list_y1) / row_h);
 var i;
 for (i = start_row; i < min(total_puzzles, start_row + visible_rows + 1); i++) {
     var ry = list_y1 + (i - start_row) * row_h - (scroll_offset mod row_h);
-    if (ry + row_h < list_y1 || ry > list_y2) continue;
+    if (ry + row_h < list_y1 || ry >= list_y2) continue;
 
     var diff;
     if      (i < 30) { diff = 1; }
@@ -196,9 +196,9 @@ var _lb_cy = room_height - 40;
 var _lb_fv  = lb_btn_hover ? 190 : 150;
 draw_set_alpha(0.85);
 draw_set_colour(make_colour_hsv(40, 160, _lb_fv));
-draw_roundrect(_lb_cx - 56, _lb_cy - 12, _lb_cx + 56, _lb_cy + 12, false);
+draw_roundrect(_lb_cx - 76, _lb_cy - 12, _lb_cx + 76, _lb_cy + 12, false);
 draw_set_colour(make_colour_hsv(40, 220, max(_lb_fv - 50, 20)));
-draw_roundrect(_lb_cx - 56, _lb_cy - 12, _lb_cx + 56, _lb_cy + 12, true);
+draw_roundrect(_lb_cx - 76, _lb_cy - 12, _lb_cx + 76, _lb_cy + 12, true);
 draw_set_alpha(1);
 draw_set_font(fnt_script);
 draw_set_halign(fa_center);
