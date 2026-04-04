@@ -79,14 +79,14 @@ ui_btn_press = [0,      0,      0,           0          ];
 // --- Letter bank: A-Z tiles along the bottom ---
 var i;
 for (i = 0; i < 26; i++) {
-    bank_tile[i] = instance_create(10 + (36 * i), room_height - 80, obj_tile_beginner);
+    bank_tile[i] = instance_create(18 + (36 * i), room_height - 80, obj_tile_beginner);
     bank_tile[i].is_bank_tile   = true;
     bank_tile[i].is_guess_tile  = false;
     bank_tile[i].letter_index   = i;
 }
 
 // Clear-all button: one tile-width to the right of Z
-var cb = instance_create(10 + (36 * 26), room_height - 76, obj_tile_beginner);
+var cb = instance_create(18 + (36 * 26), room_height - 76, obj_tile_beginner);
 cb.is_bank_tile    = false;
 cb.is_guess_tile   = false;
 cb.is_clear_button = true;
@@ -106,7 +106,7 @@ for (i = 1; i <= phrase_length; i++) {
         var plain_idx = string_byte_at(plain_char, 1) - 65;
 
         // Bottom tile: shows the encrypted letter
-        Cryptic_Tile[i] = instance_create(10 + (36 * puzzle_column), 39 * puzzle_row + 17, obj_tile_beginner);
+        Cryptic_Tile[i] = instance_create(18 + (36 * puzzle_column), 38 * puzzle_row + 17, obj_tile_beginner);
         Cryptic_Tile[i].image_blend       = make_colour_hsv(150 + irandom(25), 5 + irandom(25), 231 + irandom(20));
         Cryptic_Tile[i].is_bank_tile      = false;
         Cryptic_Tile[i].is_guess_tile     = false;
