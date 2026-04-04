@@ -77,7 +77,7 @@ if (popup_type == "win") {
     draw_set_font(-1);
     draw_set_colour(c_white);
     draw_set_alpha(popup_alpha * 0.92);
-    draw_text_ext(_gw * 0.5, _py + 62, _disp, -1, _pw - 48);
+    draw_text_ext(_gw * 0.5, _py + 70, _disp, -1, _pw - 48);
 
     // Puzzle title + time + stars
     var _tsecs = floor(global.puzzle_elapsed_ms / 1000);
