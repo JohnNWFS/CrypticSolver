@@ -57,7 +57,7 @@ var _ss = _elapsed_s mod 60;
 var _time_str = string(_mm) + ":" + ((_ss < 10) ? "0" : "") + string(_ss);
 draw_set_colour(make_colour_hsv(0, 0, 180));
 draw_set_halign(fa_right);
-draw_text(room_width - 8, bar_y, _time_str);
+draw_text(room_width - 8, room_height - 80, _time_str);
 draw_set_halign(fa_left);
 
 // ---------------------------------------------------------------
