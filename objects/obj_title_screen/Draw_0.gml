@@ -183,10 +183,12 @@ if (_tc > 0) {
     draw_text(cx, list_y2 + 14, "No leaderboard scores yet — be the first!");
 }
 
-// Footer hint
-draw_set_alpha(0.55);
-draw_set_colour(make_colour_hsv(0, 0, 130));
-draw_text(cx, list_y2 + 32, "F1 = instructions   |   F3 = toggle letter style");
+// Hint text — sits between Set Name button and PLAY button in the bottom row
+draw_set_halign(fa_left);
+draw_set_valign(fa_middle);
+draw_set_alpha(0.85);
+draw_set_colour(make_colour_hsv(0, 0, 195));
+draw_text(148, room_height - 40, "F1 = instructions   |   F3 = toggle letter style");
 
 // --- Leaderboard button (bottom-right) ---
 var _lb_cx = room_width - 80;
