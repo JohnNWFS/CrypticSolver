@@ -106,7 +106,7 @@ for (i = 1; i <= phrase_length; i++) {
         var plain_idx = string_byte_at(plain_char, 1) - 65;
 
         // Bottom tile: shows the encrypted letter
-        Cryptic_Tile[i] = instance_create(10 + (36 * puzzle_column), 40 * puzzle_row + 16, obj_tile_beginner);
+        Cryptic_Tile[i] = instance_create(10 + (36 * puzzle_column), 39 * puzzle_row + 17, obj_tile_beginner);
         Cryptic_Tile[i].image_blend       = make_colour_hsv(150 + irandom(25), 5 + irandom(25), 231 + irandom(20));
         Cryptic_Tile[i].is_bank_tile      = false;
         Cryptic_Tile[i].is_guess_tile     = false;
