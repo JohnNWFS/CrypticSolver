@@ -1,6 +1,6 @@
 /// @description Draw popup: fancy win overlay or simple info/error box.
-var _gw = display_get_gui_width();
-var _gh = display_get_gui_height();
+var _gw = room_width;
+var _gh = room_height;
 
 // ---------------------------------------------------------------
 // WIN SCREEN
