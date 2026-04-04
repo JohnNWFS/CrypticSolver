@@ -61,7 +61,7 @@ global.drag_press_y = 0;
 // --- Action buttons — drawn in Draw_64, clicked in Step_0 ---
 // Centered horizontally between puzzle tiles and the bank row.
 var _bw  = 88;  var _bh = 24;  var _bg = 8;
-var _by  = room_height - 90;
+var _by  = room_height - 58;
 var _bx0 = (room_width - (4 * _bw + 3 * _bg)) / 2 + _bw / 2;
 var _bs  = _bw + _bg;
 
