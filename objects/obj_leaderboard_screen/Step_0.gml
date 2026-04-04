@@ -52,8 +52,7 @@ var row_click = !sb_dragging
              && _mx >= list_x1 && _mx < sb_hit_x1
              && _my >= list_y1 && _my < list_y2;
 if (row_click) {
-    var _row_in_view = floor((_my - list_y1) / row_h);
-    var _clicked_row = _row_in_view + floor(scroll_offset / row_h);
+    var _clicked_row = floor((_my - list_y1 + scroll_offset) / row_h);
     if (_clicked_row >= 0 && _clicked_row < PUZZLE_TOTAL) {
         detail_puzzle          = _clicked_row;
         detail_state           = "loading";

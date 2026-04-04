@@ -49,6 +49,10 @@ if (popup_type == "win") {
         // Save name for next time
         global.player_name = lb_name_input;
         scr_save_progress();
+        // Re-fetch leaderboard so updated scores show immediately
+        global.lb_win_state    = "loading";
+        global.lb_win_fetch_id = scr_fetch_leaderboard(global.lb_win_puzzle);
+        lb_state = "loading";
     } else if (global.lb_submit_state == "error" && !lb_submitted) {
         lb_submitted   = true;   // stop retrying
         lb_submit_rank = 0;
