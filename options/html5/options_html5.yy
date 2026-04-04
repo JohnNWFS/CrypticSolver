@@ -16,7 +16,7 @@
   "option_html5_icon":"${options_dir}/html5/fav.ico",
   "option_html5_index":"use_default",
   "option_html5_interpolate_pixels":true,
-  "option_html5_jsprepend":"",
+  "option_html5_jsprepend":"document.addEventListener('DOMContentLoaded',function(){var s=document.createElement('style');s.textContent='body{margin:0;padding:0;background:#000;display:flex;justify-content:center;align-items:center;min-height:100vh;overflow:hidden;}canvas{width:min(100vw,calc(100vh * (1024 / 480)));height:auto;}';document.head.appendChild(s);});",
   "option_html5_loadingbar":"use_default",
   "option_html5_localrunalert":true,
   "option_html5_outputdebugtoconsole":true,
