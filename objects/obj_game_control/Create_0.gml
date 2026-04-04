@@ -61,7 +61,7 @@ global.drag_press_y = 0;
 // --- Action buttons — drawn in Draw_64, clicked in Step_0 ---
 // Centered horizontally between puzzle tiles and the bank row.
 var _bw  = 88;  var _bh = 24;  var _bg = 8;
-var _by  = room_height - 58;
+var _by  = room_height - 90;
 var _bx0 = (room_width - (4 * _bw + 3 * _bg)) / 2 + _bw / 2;
 var _bs  = _bw + _bg;
 
@@ -79,14 +79,14 @@ ui_btn_press = [0,      0,      0,           0          ];
 // --- Letter bank: A-Z tiles along the bottom ---
 var i;
 for (i = 0; i < 26; i++) {
-    bank_tile[i] = instance_create(10 + (36 * i), room_height - 62, obj_tile_beginner);
+    bank_tile[i] = instance_create(10 + (36 * i), room_height - 94, obj_tile_beginner);
     bank_tile[i].is_bank_tile   = true;
     bank_tile[i].is_guess_tile  = false;
     bank_tile[i].letter_index   = i;
 }
 
 // Clear-all button: one tile-width to the right of Z
-var cb = instance_create(10 + (36 * 26), room_height - 58, obj_tile_beginner);
+var cb = instance_create(10 + (36 * 26), room_height - 90, obj_tile_beginner);
 cb.is_bank_tile    = false;
 cb.is_guess_tile   = false;
 cb.is_clear_button = true;
