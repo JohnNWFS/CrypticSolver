@@ -13,3 +13,8 @@ is_hinted         = false; // guess tiles: revealed by hint — cannot be change
 // Visual variety & hover
 image_angle = choose(0, 90, 180, 270);
 is_hovered  = false;
+
+// Long-press clear (mobile — no right click)
+#macro LP_FRAMES 45   // ~0.75s at 60fps
+lp_timer = 0;
+lp_fired = false;

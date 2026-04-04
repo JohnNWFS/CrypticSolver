@@ -45,3 +45,19 @@ if (is_clear_button) {
         }
     }
 }
+
+// Long-press progress bar (mobile clear feedback)
+if (lp_timer > 0 && is_guess_tile && !is_hinted && guessed_index >= 0) {
+    var _progress = min(lp_timer / LP_FRAMES, 1);
+    var _hw       = sprite_width  * 0.5 - 2;
+    var _bar_y    = draw_y + sprite_height * 0.5 - 4;
+    // Dark backing
+    draw_set_alpha(0.55);
+    draw_set_colour(c_black);
+    draw_rectangle(x - _hw, _bar_y, x + _hw, _bar_y + 3, false);
+    // Coloured fill: gold → red as it fills
+    draw_set_alpha(0.9);
+    draw_set_colour(make_colour_hsv(lerp(40, 0, _progress), 220, 255));
+    draw_rectangle(x - _hw, _bar_y, x - _hw + _hw * 2 * _progress, _bar_y + 3, false);
+    draw_set_alpha(1);
+}
