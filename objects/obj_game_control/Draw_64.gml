@@ -22,7 +22,7 @@ if (global.drag_active && global.drag_letter >= 0) {
 // ---------------------------------------------------------------
 // Info bar — drawn below the bank tiles
 // ---------------------------------------------------------------
-var bar_y = room_height - 62;
+var bar_y = room_height - 76;
 
 // Puzzle title + difficulty stars
 var stars = "* ";
