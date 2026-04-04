@@ -82,9 +82,9 @@ if (popup_type == "win") {
 
     // Submit / Skip buttons (only when qualifying and data ready)
     if (lb_state == "ready" && lb_qualify && !lb_submitted) {
-        var _sb_cx  = _gw * 0.5 + 100;
+        var _sb_cx  = _gw * 0.5 + 218;   // matches Draw_64: _px + _pw - 62
         var _sk_cx  = _gw * 0.5 - 60;
-        var _btn_y  = _py + 340;
+        var _btn_y  = _py + 310;          // matches Draw_64: _entry_y + 8 = (_py+302)+8
         var _sbw    = 100;   var _sbh = 24;
         lb_submit_hover = (_mx >= _sb_cx - _sbw*0.5 && _mx <= _sb_cx + _sbw*0.5
                         && _my >= _btn_y - _sbh*0.5 && _my <= _btn_y + _sbh*0.5);
