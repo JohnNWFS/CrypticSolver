@@ -214,11 +214,12 @@ if (popup_type == "win") {
         draw_set_alpha(popup_alpha);
         draw_text(_px + 28, _entry_y + 8, "Top 10!  Name:");
 
-        // Name input box
+        // Name input box — shifted up 34px from the label/skip row
+        var _input_y = _entry_y - 34;
         var _box_x1 = _px + 138;
         var _box_x2 = _px + _pw - 128;
-        var _box_y1 = _entry_y - 1;
-        var _box_y2 = _entry_y + 18;
+        var _box_y1 = _input_y - 1;
+        var _box_y2 = _input_y + 18;
         draw_set_colour(make_colour_hsv(0, 0, 20));
         draw_set_alpha(popup_alpha * 0.7);
         draw_rectangle(_box_x1, _box_y1, _box_x2, _box_y2, false);
@@ -232,11 +233,11 @@ if (popup_type == "win") {
         draw_set_halign(fa_left);
         draw_set_valign(fa_middle);
         var _cursor = ((lb_name_cursor div 30) mod 2 == 0) ? "|" : "";
-        draw_text(_box_x1 + 4, _entry_y + 8, lb_name_input + _cursor);
+        draw_text(_box_x1 + 4, _input_y + 8, lb_name_input + _cursor);
 
-        // Submit button
+        // Submit button — same shifted y
         var _sb_cx = _px + _pw - 62;
-        var _sb_cy = _entry_y + 8;
+        var _sb_cy = _input_y + 8;
         var _sbw = 100;  var _sbh = 24;
         var _sfv = lb_submit_hover ? 190 : 155;
         draw_set_colour(make_colour_hsv(120, 150, _sfv));
