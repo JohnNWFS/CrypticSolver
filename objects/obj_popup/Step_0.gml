@@ -32,6 +32,10 @@ if (popup_type == "win") {
                              global.win_stars,
                              floor(global.puzzle_elapsed_ms / 1000));
             lb_state = "ready";
+            // Show the virtual keyboard on mobile when the name entry appears
+            if (lb_qualify) {
+                keyboard_virtual_show(kbv_type_default, kbv_returnkey_done, true, false);
+            }
         } else if (global.lb_win_state == "error") {
             lb_state = "error";
         }
@@ -92,6 +96,7 @@ if (popup_type == "win") {
         lb_skip_hover   = (_mx >= _sk_cx - _sbw*0.5 && _mx <= _sk_cx + _sbw*0.5
                         && _my >= _sk_y - _sbh*0.5  && _my <= _sk_y + _sbh*0.5);
         if (lb_submit_hover && mouse_check_button_pressed(mb_left) && popup_alpha >= 0.8) {
+            keyboard_virtual_hide();
             global.lb_submit_state = "pending";
             global.lb_submit_id = scr_submit_score(global.lb_win_puzzle,
                                                     global.win_stars,
@@ -99,6 +104,7 @@ if (popup_type == "win") {
                                                     lb_name_input);
         }
         if (lb_skip_hover && mouse_check_button_pressed(mb_left) && popup_alpha >= 0.8) {
+            keyboard_virtual_hide();
             lb_submitted = true;
         }
     }
@@ -110,6 +116,7 @@ if (popup_type == "win") {
         win_btn_hover[_bi] = (_mx >= _btn_cx[_bi] - _bw * 0.5 && _mx <= _btn_cx[_bi] + _bw * 0.5
                            && _my >= _by - _bh * 0.5          && _my <= _by + _bh * 0.5);
         if (win_btn_hover[_bi] && mouse_check_button_pressed(mb_left) && popup_alpha >= 0.9) {
+            keyboard_virtual_hide();
             win_btn_press[_bi] = 8;
             if (_bi == 0) {
                 // Next puzzle
