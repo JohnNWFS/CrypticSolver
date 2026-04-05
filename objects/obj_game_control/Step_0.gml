@@ -33,7 +33,7 @@ for (_bi = 0; _bi < 4; _bi++) {
         ui_btn_press[_bi] = 8;
         switch (_bi) {
             case 0: scr_use_hint(); break;
-            case 1: global.puzzle_index = -1; room_restart(); break;
+            case 1: global.puzzle_index = -1; room_goto(room); break;
             case 2: global.font_index = (global.font_index + 1) mod (global.font_list_size + 1); break;
             case 3:
                 if (global.selected_bank_id != noone && instance_exists(global.selected_bank_id)) {
@@ -94,7 +94,7 @@ if (keyboard_check_pressed(vk_f1)) {
 // F2 picks a fresh random puzzle and restarts the room
 if (keyboard_check_pressed(vk_f2)) {
     global.puzzle_index = -1;
-    room_restart();
+    room_goto(room);
 }
 
 // F3 cycles: sprites → font 1 → font 2 → … → back to sprites

@@ -16,7 +16,7 @@
   "option_html5_icon":"${options_dir}/html5/fav.ico",
   "option_html5_index":"use_default",
   "option_html5_interpolate_pixels":true,
-  "option_html5_jsprepend":"document.addEventListener('DOMContentLoaded',function(){var s=document.createElement('style');s.textContent='body{margin:0;padding:0;background:#000;display:flex;justify-content:center;align-items:center;min-height:100vh;overflow:hidden;}canvas{width:min(100vw,calc(100vh * (1024 / 480)));height:auto;}';document.head.appendChild(s);});",
+  "option_html5_jsprepend":"document.addEventListener('DOMContentLoaded',function(){var s=document.createElement('style');s.textContent='html,body{margin:0;padding:0;width:100%;height:100%;background:#000;display:flex;justify-content:center;align-items:center;overflow:hidden;}canvas{touch-action:none;}';document.head.appendChild(s);var d=document.createElement('style');document.head.appendChild(d);function r(){var sc=Math.min(window.innerWidth/1024,window.innerHeight/480);var w=Math.floor(1024*sc),h=Math.floor(480*sc);d.textContent='canvas{width:'+w+'px!important;height:'+h+'px!important;}';}r();window.addEventListener('resize',r);window.addEventListener('orientationchange',function(){setTimeout(r,150);});});",
   "option_html5_loadingbar":"use_default",
   "option_html5_localrunalert":true,
   "option_html5_outputdebugtoconsole":true,

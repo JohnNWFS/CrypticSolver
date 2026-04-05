@@ -32,10 +32,6 @@ if (popup_type == "win") {
                              global.win_stars,
                              floor(global.puzzle_elapsed_ms / 1000));
             lb_state = "ready";
-            // Show the virtual keyboard on mobile when the name entry appears
-            if (lb_qualify) {
-                keyboard_virtual_show(kbv_type_default, kbv_returnkey_done, true, false);
-            }
         } else if (global.lb_win_state == "error") {
             lb_state = "error";
         }
@@ -114,6 +110,21 @@ if (popup_type == "win") {
             keyboard_virtual_hide();
             lb_submitted = true;
         }
+        // On HTML5/mobile: tapping the name input box opens a native browser prompt.
+        // window.prompt() (what get_string maps to) is the only reliable way to
+        // trigger the soft keyboard on Android Chrome/Edge from a web game.
+        if (scr_is_html5() && mouse_check_button_pressed(mb_left) && popup_alpha >= 0.8) {
+            var _box_x1 = _px + 98;
+            var _box_x2 = _px + 410;   // _px + _pw - 150
+            var _entry_y2 = _py + 302;
+            if (_mx >= _box_x1 && _mx <= _box_x2
+             && _my >= _entry_y2 - 2 && _my <= _entry_y2 + 20) {
+                var _new_name = get_string("Enter your name for the leaderboard:", lb_name_input);
+                if (_new_name != "") {
+                    lb_name_input = string_copy(_new_name, 1, 20);
+                }
+            }
+        }
     }
 
     // Main NEXT / MENU buttons
@@ -131,7 +142,7 @@ if (popup_type == "win") {
                 global.lb_win_state   = "idle";
                 global.lb_submit_state = "idle";
                 instance_destroy();
-                room_restart();
+                room_goto(room);
             } else {
                 // Main menu
                 global.lb_win_state   = "idle";
