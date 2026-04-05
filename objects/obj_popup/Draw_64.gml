@@ -92,7 +92,7 @@ if (popup_type == "win") {
 
     var _sr   = 9;
     var _sgap = 24;
-    var _sx0  = _gw * 0.5 - 28;   // moved 80px left to avoid overlap with time
+    var _sx0  = _gw * 0.5 + 52;
     var _sy   = _py + 160;
     var _e;
     for (_e = 0; _e < 3; _e++) {
@@ -134,7 +134,7 @@ if (popup_type == "win") {
     var _row_h   = 14;
     var _name_x  = _px + 44;
     var _time_x  = _px + _pw - 28;
-    var _star_x  = _px + _pw - 68;
+    var _star_x  = _px + _pw - 96;
 
     if (lb_state == "loading") {
         draw_set_colour(make_colour_hsv(0, 0, 140));
