@@ -92,7 +92,7 @@ if (popup_type == "win") {
 
     var _sr   = 9;
     var _sgap = 24;
-    var _sx0  = _gw * 0.5 + 52;
+    var _sx0  = _gw * 0.5 - 28;   // moved 80px left to avoid overlap with time
     var _sy   = _py + 160;
     var _e;
     for (_e = 0; _e < 3; _e++) {
