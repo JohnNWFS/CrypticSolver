@@ -79,17 +79,16 @@ if (is_numeric($puzzle_param)) {
 // ---- Best score per puzzle (leaderboard screen overview) ----
 } elseif ($puzzle_param === 'all') {
     // One row per puzzle — the best score (stars DESC, time ASC)
+    // Correlated subquery avoids ONLY_FULL_GROUP_BY issues on MySQL 5.7+
     $stmt = $pdo->query(
         'SELECT cs.puzzle_index, cs.player_name AS name, cs.stars, cs.time_seconds
          FROM cryptic_scores cs
-         INNER JOIN (
-             SELECT puzzle_index,
-                    MAX(stars * 100000 - time_seconds) AS best_val
-             FROM cryptic_scores
-             GROUP BY puzzle_index
-         ) best ON cs.puzzle_index = best.puzzle_index
-               AND (cs.stars * 100000 - cs.time_seconds) = best.best_val
-         GROUP BY cs.puzzle_index
+         WHERE cs.id = (
+             SELECT s2.id FROM cryptic_scores s2
+             WHERE s2.puzzle_index = cs.puzzle_index
+             ORDER BY s2.stars DESC, s2.time_seconds ASC
+             LIMIT 1
+         )
          ORDER BY cs.puzzle_index ASC'
     );
     $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
