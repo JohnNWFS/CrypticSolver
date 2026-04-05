@@ -3,9 +3,9 @@ var _total_rows = PUZZLE_TOTAL;
 var visible_rows = floor((list_y2 - list_y1) / row_h);
 var scroll_max   = max(0, (_total_rows - visible_rows) * row_h);
 
-// Room mouse coordinates — mouse_x/y correctly account for CSS canvas scaling in HTML5
-var _mx = mouse_x;
-var _my = mouse_y;
+// Platform-aware mouse coordinates (GUI space)
+var _mx = scr_ui_mouse_x();
+var _my = scr_ui_mouse_y();
 
 // ---- Scrollbar geometry ----
 var track_x  = list_x2 + 10;
@@ -70,11 +70,16 @@ if (detail_state == "loading" && global.lb_win_state == "ready") {
 }
 
 // ---- Back button / Escape ----
+// Button is drawn at room_height-60 in GUI space (Draw_64).
+// Hit detection uses scr_ui_mouse_x/y() so on Windows we get
+// device_mouse_to_gui coords, which correctly map to GUI draw positions.
 var _back_cx = room_width * 0.5;
 var _back_cy = room_height - 60;
 var _back_hw = 60;  var _back_hh = 14;
-var _back_hover = (_mx >= _back_cx - _back_hw && _mx <= _back_cx + _back_hw
-                && _my >= _back_cy - _back_hh && _my <= _back_cy + _back_hh);
+var _back_mx = scr_ui_mouse_x();
+var _back_my = scr_ui_mouse_y();
+var _back_hover = (_back_mx >= _back_cx - _back_hw && _back_mx <= _back_cx + _back_hw
+                && _back_my >= _back_cy - _back_hh && _back_my <= _back_cy + _back_hh);
 if ((_back_hover && mouse_check_button_pressed(mb_left))
  || keyboard_check_pressed(vk_escape)) {
     room_goto(rm_title);

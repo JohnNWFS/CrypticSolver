@@ -100,10 +100,21 @@ var _nm_cy = room_height - 32;
 var _nm_hover = (mouse_x >= _nm_cx - 56 && mouse_x <= _nm_cx + 56
               && mouse_y >= _nm_cy - 12 && mouse_y <= _nm_cy + 12);
 if (_nm_hover && mouse_check_button_pressed(mb_left)) {
-    name_overlay    = true;
-    name_input      = (variable_global_exists("player_name") ? global.player_name : "");
-    name_input_cursor = 0;
-    keyboard_string = "";
+    if (scr_is_html5()) {
+        // On HTML5/mobile, get_string() maps to window.prompt() — the browser manages
+        // the keyboard natively, which is the only reliable approach on Android Chrome/Edge.
+        var _prev = (variable_global_exists("player_name") ? global.player_name : "");
+        var _result = get_string("Enter your display name:", _prev);
+        if (_result != "") {
+            global.player_name = string_copy(_result, 1, 20);
+            scr_save_progress();
+        }
+    } else {
+        name_overlay    = true;
+        name_input      = (variable_global_exists("player_name") ? global.player_name : "");
+        name_input_cursor = 0;
+        keyboard_string = "";
+    }
 }
 
 // F1 = instructions / about screen

@@ -27,6 +27,10 @@ if (mouse_check_button_pressed(mb_left)) {
     if (point_in_circle(mouse_x, mouse_y, ax, content_y2 - 29, 16)) {
         scroll_y += scroll_speed * 3;
     }
+    // Footer "Escape or Backspace to return" — tap anywhere in the footer band
+    if (mouse_y >= content_y2) {
+        room_goto(rm_title);
+    }
 }
 
 // Clamp

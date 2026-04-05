@@ -167,7 +167,10 @@ draw_line(lx, content_y2 + 2, room_width - lx, content_y2 + 2);
 draw_set_halign(fa_center);
 draw_set_colour(make_colour_hsv(40, 180, 220));
 draw_set_alpha(1);
-draw_text(cx, room_height - 24, "[ Escape  or  Backspace  to return to the menu ]");
+var _back_label = scr_is_html5()
+    ? "[ Tap here  /  Escape  /  Backspace  to return ]"
+    : "[ Escape  or  Backspace  to return to the menu ]";
+draw_text(cx, room_height - 24, _back_label);
 
 // ---------------------------------------------------------------
 // SCROLL ARROWS  (always on top)

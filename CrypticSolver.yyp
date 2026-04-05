@@ -80,6 +80,7 @@
     {"id":{"name":"scr_leaderboard","path":"scripts/scr_leaderboard/scr_leaderboard.yy",},},
     {"id":{"name":"scr_load_progress","path":"scripts/scr_load_progress/scr_load_progress.yy",},},
     {"id":{"name":"scr_pick_a_phrase","path":"scripts/scr_pick_a_phrase/scr_pick_a_phrase.yy",},},
+    {"id":{"name":"scr_platform","path":"scripts/scr_platform/scr_platform.yy",},},
     {"id":{"name":"scr_save_progress","path":"scripts/scr_save_progress/scr_save_progress.yy",},},
     {"id":{"name":"scr_show_popup","path":"scripts/scr_show_popup/scr_show_popup.yy",},},
     {"id":{"name":"scr_update_bank_dimming","path":"scripts/scr_update_bank_dimming/scr_update_bank_dimming.yy",},},
