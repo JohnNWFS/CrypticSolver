@@ -1,6 +1,6 @@
 /// @description Draw the leaderboard overview screen.
-var _gw = room_width;
-var _gh = room_height;
+var _gw = scr_ui_width();
+var _gh = scr_ui_height();
 var cx  = _gw * 0.5;
 
 // ---- Title ----

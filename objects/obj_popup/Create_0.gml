@@ -5,8 +5,8 @@ popup_alpha   = 0;
 popup_timer   = 0;
 
 // Win-screen: sparkles and inline buttons
-var _gw = display_get_gui_width();
-var _gh = display_get_gui_height();
+var _gw = scr_ui_width();
+var _gh = scr_ui_height();
 var s;
 win_sparkles = array_create(40);
 for (s = 0; s < 40; s++) {

@@ -20,12 +20,14 @@ if (global.is_dragging) {
 // ---------------------------------------------------------------
 // Action buttons — hover detection and click handling
 // ---------------------------------------------------------------
+var _umx = scr_ui_mouse_x();
+var _umy = scr_ui_mouse_y();
 var _bi;
 for (_bi = 0; _bi < 4; _bi++) {
     var _hw = ui_btn_w[_bi] * 0.5;
     var _hh = ui_btn_h[_bi] * 0.5;
-    ui_btn_hover[_bi] = (mouse_x >= ui_btn_cx[_bi] - _hw && mouse_x <= ui_btn_cx[_bi] + _hw
-                      && mouse_y >= ui_btn_cy[_bi] - _hh && mouse_y <= ui_btn_cy[_bi] + _hh);
+    ui_btn_hover[_bi] = (_umx >= ui_btn_cx[_bi] - _hw && _umx <= ui_btn_cx[_bi] + _hw
+                      && _umy >= ui_btn_cy[_bi] - _hh && _umy <= ui_btn_cy[_bi] + _hh);
 
     if (ui_btn_hover[_bi] && mouse_check_button_pressed(mb_left)) {
         ui_btn_press[_bi] = 8;

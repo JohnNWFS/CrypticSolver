@@ -11,8 +11,8 @@ if (popup_type == "win") {
         sp.y   += sp.vy;
         sp.life--;
         if (sp.life <= 0) {
-            sp.x    = irandom(room_width);
-            sp.y    = room_height + 10;
+            sp.x    = irandom(scr_ui_width());
+            sp.y    = scr_ui_height() + 10;
             sp.vx   = random_range(-1.5, 1.5);
             sp.vy   = random_range(-2.5, -0.8);
             var _l  = 60 + irandom(120);
@@ -75,8 +75,8 @@ if (popup_type == "win") {
     }
 
     // ---- Button geometry (matches Draw_64) ----
-    var _gw  = room_width;
-    var _gh  = room_height;
+    var _gw  = scr_ui_width();
+    var _gh  = scr_ui_height();
     var _pw  = 560;
     var _ph  = 370;
     var _py  = _gh * 0.5 - _ph * 0.5 - 10;
@@ -85,8 +85,8 @@ if (popup_type == "win") {
     var _by  = _py + _ph - 22;
     var _cx0 = _gw * 0.5 - 78;
     var _cx1 = _gw * 0.5 + 78;
-    var _mx  = mouse_x;
-    var _my  = mouse_y;
+    var _mx  = scr_ui_mouse_x();
+    var _my  = scr_ui_mouse_y();
 
     // Submit / Skip buttons (only when qualifying and data ready)
     if (lb_state == "ready" && lb_qualify && !lb_submitted) {

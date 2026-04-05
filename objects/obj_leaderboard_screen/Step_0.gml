@@ -3,9 +3,9 @@ var _total_rows = PUZZLE_TOTAL;
 var visible_rows = floor((list_y2 - list_y1) / row_h);
 var scroll_max   = max(0, (_total_rows - visible_rows) * row_h);
 
-// Room mouse coordinates — mouse_x/y correctly account for CSS canvas scaling in HTML5
-var _mx = mouse_x;
-var _my = mouse_y;
+// Platform-aware mouse coordinates (GUI space)
+var _mx = scr_ui_mouse_x();
+var _my = scr_ui_mouse_y();
 
 // ---- Scrollbar geometry ----
 var track_x  = list_x2 + 10;
@@ -70,8 +70,8 @@ if (detail_state == "loading" && global.lb_win_state == "ready") {
 }
 
 // ---- Back button / Escape ----
-var _back_cx = room_width * 0.5;
-var _back_cy = room_height - 60;
+var _back_cx = scr_ui_width() * 0.5;
+var _back_cy = scr_ui_height() - 60;
 var _back_hw = 60;  var _back_hh = 14;
 var _back_hover = (_mx >= _back_cx - _back_hw && _mx <= _back_cx + _back_hw
                 && _my >= _back_cy - _back_hh && _my <= _back_cy + _back_hh);
