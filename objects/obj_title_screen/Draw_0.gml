@@ -188,11 +188,11 @@ draw_set_halign(fa_left);
 draw_set_valign(fa_middle);
 draw_set_alpha(0.85);
 draw_set_colour(make_colour_hsv(0, 0, 195));
-draw_text(148, room_height - 40, "F1 = instructions");
+draw_text(148, room_height - 32, "F1 = instructions");
 
 // --- Leaderboard button (bottom-right) ---
 var _lb_cx = room_width - 80;
-var _lb_cy = room_height - 40;
+var _lb_cy = room_height - 32;
 var _lb_fv  = lb_btn_hover ? 190 : 150;
 draw_set_alpha(0.85);
 draw_set_colour(make_colour_hsv(40, 160, _lb_fv));
@@ -208,7 +208,7 @@ draw_text(_lb_cx, _lb_cy, "LEADERBOARD");
 
 // --- Name button (bottom-left) ---
 var _nm_cx = 70;
-var _nm_cy = room_height - 40;
+var _nm_cy = room_height - 32;
 var _nm_hover = (mouse_x >= _nm_cx - 56 && mouse_x <= _nm_cx + 56
               && mouse_y >= _nm_cy - 12 && mouse_y <= _nm_cy + 12);
 var _nm_fv = _nm_hover ? 150 : 110;

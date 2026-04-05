@@ -15,7 +15,7 @@ if (!variable_global_exists("puzzle_index")) { global.puzzle_index = -1; }
 scr_load_progress();
 
 // --- Inline action buttons drawn in Draw_0, clicked in Step_0 ---
-var _by = room_height - 40;
+var _by = room_height - 32;
 ts_btn_cx    = [650, 800];
 ts_btn_cy    = [_by, _by];
 ts_btn_w     = [100, 84];
