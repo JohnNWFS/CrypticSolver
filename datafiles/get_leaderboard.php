@@ -61,13 +61,13 @@ if (is_numeric($puzzle_param)) {
 // ---- Recent submissions (title screen ticker) ----
 } elseif ($puzzle_param === 'recent') {
     $limit = isset($_GET['limit']) ? min(max(intval($_GET['limit']), 1), 50) : 20;
-    $stmt  = $pdo->prepare(
+    // LIMIT cannot be a PDO bound param on some MySQL versions — embed safely as validated int
+    $stmt  = $pdo->query(
         'SELECT puzzle_index, player_name AS name, stars, time_seconds
          FROM cryptic_scores
          ORDER BY submitted_at DESC
-         LIMIT ?'
+         LIMIT ' . $limit
     );
-    $stmt->execute([$limit]);
     $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
     foreach ($rows as &$r) {
         $r['puzzle_index'] = (int)$r['puzzle_index'];
