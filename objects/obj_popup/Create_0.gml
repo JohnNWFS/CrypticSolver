@@ -35,8 +35,9 @@ lb_submit_rank  = 0;           // rank returned by server after submit
 lb_name_input   = (variable_global_exists("player_name") ? global.player_name : "");
 lb_name_focused = true;        // name field auto-focused when qualify
 lb_name_cursor  = 0;           // timer for blinking cursor
-lb_submit_hover = false;
-lb_skip_hover   = false;
+lb_submit_hover  = false;
+lb_skip_hover    = false;
+lb_name_dialog_id = -1;   // tracks get_string_async() request on HTML5
 
 // Kick off the leaderboard fetch
 if (variable_global_exists("puzzle_index") && global.puzzle_index >= 0) {

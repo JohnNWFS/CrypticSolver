@@ -42,9 +42,10 @@ ticker_alpha  = 1;     // for fade transition
 #macro TICKER_INTERVAL 180   // steps between ticker advances
 
 // Name input overlay
-name_overlay   = false;    // is the name entry overlay open?
-name_input     = (variable_global_exists("player_name") ? global.player_name : "");
+name_overlay      = false;    // is the name entry overlay open?
+name_input        = (variable_global_exists("player_name") ? global.player_name : "");
 name_input_cursor = 0;
+name_dialog_id    = -1;       // tracks get_string_async() request on HTML5
 
 // Ensure lb globals exist (obj_game_control may not have run yet)
 if (!variable_global_exists("lb_ticker_state"))    { global.lb_ticker_state    = "idle"; }

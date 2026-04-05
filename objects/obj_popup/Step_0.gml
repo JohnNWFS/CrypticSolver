@@ -111,18 +111,14 @@ if (popup_type == "win") {
             lb_submitted = true;
         }
         // On HTML5/mobile: tapping the name input box opens a native browser prompt.
-        // window.prompt() (what get_string maps to) is the only reliable way to
-        // trigger the soft keyboard on Android Chrome/Edge from a web game.
+        // get_string_async() maps to window.prompt() — result arrives in Other_63.
         if (scr_is_html5() && mouse_check_button_pressed(mb_left) && popup_alpha >= 0.8) {
             var _box_x1 = _px + 98;
             var _box_x2 = _px + 410;   // _px + _pw - 150
             var _entry_y2 = _py + 302;
             if (_mx >= _box_x1 && _mx <= _box_x2
              && _my >= _entry_y2 - 2 && _my <= _entry_y2 + 20) {
-                var _new_name = get_string("Enter your name for the leaderboard:", lb_name_input);
-                if (_new_name != "") {
-                    lb_name_input = string_copy(_new_name, 1, 20);
-                }
+                lb_name_dialog_id = get_string_async("Enter your name for the leaderboard:", lb_name_input);
             }
         }
     }

@@ -101,14 +101,9 @@ var _nm_hover = (mouse_x >= _nm_cx - 56 && mouse_x <= _nm_cx + 56
               && mouse_y >= _nm_cy - 12 && mouse_y <= _nm_cy + 12);
 if (_nm_hover && mouse_check_button_pressed(mb_left)) {
     if (scr_is_html5()) {
-        // On HTML5/mobile, get_string() maps to window.prompt() — the browser manages
-        // the keyboard natively, which is the only reliable approach on Android Chrome/Edge.
+        // On HTML5/mobile, use get_string_async() — result handled in Other_63 (Async Dialog)
         var _prev = (variable_global_exists("player_name") ? global.player_name : "");
-        var _result = get_string("Enter your display name:", _prev);
-        if (_result != "") {
-            global.player_name = string_copy(_result, 1, 20);
-            scr_save_progress();
-        }
+        name_dialog_id = get_string_async("Enter your display name:", _prev);
     } else {
         name_overlay    = true;
         name_input      = (variable_global_exists("player_name") ? global.player_name : "");
