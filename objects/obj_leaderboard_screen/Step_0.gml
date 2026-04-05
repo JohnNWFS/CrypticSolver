@@ -70,13 +70,16 @@ if (detail_state == "loading" && global.lb_win_state == "ready") {
 }
 
 // ---- Back button / Escape ----
-// Back button uses room_height (matches Draw_64 draw position) and
-// raw mouse_x/y (room space) which aligns correctly on all platforms.
+// Button is drawn at room_height-60 in GUI space (Draw_64).
+// Hit detection uses scr_ui_mouse_x/y() so on Windows we get
+// device_mouse_to_gui coords, which correctly map to GUI draw positions.
 var _back_cx = room_width * 0.5;
 var _back_cy = room_height - 60;
 var _back_hw = 60;  var _back_hh = 14;
-var _back_hover = (mouse_x >= _back_cx - _back_hw && mouse_x <= _back_cx + _back_hw
-                && mouse_y >= _back_cy - _back_hh && mouse_y <= _back_cy + _back_hh);
+var _back_mx = scr_ui_mouse_x();
+var _back_my = scr_ui_mouse_y();
+var _back_hover = (_back_mx >= _back_cx - _back_hw && _back_mx <= _back_cx + _back_hw
+                && _back_my >= _back_cy - _back_hh && _back_my <= _back_cy + _back_hh);
 if ((_back_hover && mouse_check_button_pressed(mb_left))
  || keyboard_check_pressed(vk_escape)) {
     room_goto(rm_title);
