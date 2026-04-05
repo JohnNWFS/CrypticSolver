@@ -134,7 +134,7 @@ if (popup_type == "win") {
     var _row_h   = 14;
     var _name_x  = _px + 44;
     var _time_x  = _px + _pw - 28;
-    var _star_x  = _px + _pw - 96;
+    var _star_x  = _px + _pw - 120;
 
     if (lb_state == "loading") {
         draw_set_colour(make_colour_hsv(0, 0, 140));
