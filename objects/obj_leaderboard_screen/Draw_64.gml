@@ -179,13 +179,14 @@ if (detail_puzzle >= 0) {
 }
 
 // ---- Back button ----
+// Position based on room_height so the button sits at the visual bottom
+// on both Windows and HTML5. Hit detection uses mouse_x/y (room space)
+// which correctly maps to that position on all platforms.
 var _back_cx = _gw * 0.5;
-var _back_cy = _gh - 60;
+var _back_cy = room_height - 60;
 var _back_hw = 60;  var _back_hh = 14;
-var _umx = scr_ui_mouse_x();
-var _umy = scr_ui_mouse_y();
-var _back_hover = (_umx >= _back_cx - _back_hw && _umx <= _back_cx + _back_hw
-                && _umy >= _back_cy - _back_hh && _umy <= _back_cy + _back_hh);
+var _back_hover = (mouse_x >= _back_cx - _back_hw && mouse_x <= _back_cx + _back_hw
+                && mouse_y >= _back_cy - _back_hh && mouse_y <= _back_cy + _back_hh);
 var _bfv = _back_hover ? 180 : 140;
 draw_set_colour(make_colour_hsv(210, 100, _bfv));
 draw_set_alpha(0.85);

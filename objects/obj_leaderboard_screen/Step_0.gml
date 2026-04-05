@@ -70,11 +70,13 @@ if (detail_state == "loading" && global.lb_win_state == "ready") {
 }
 
 // ---- Back button / Escape ----
-var _back_cx = scr_ui_width() * 0.5;
-var _back_cy = scr_ui_height() - 60;
+// Back button uses room_height (matches Draw_64 draw position) and
+// raw mouse_x/y (room space) which aligns correctly on all platforms.
+var _back_cx = room_width * 0.5;
+var _back_cy = room_height - 60;
 var _back_hw = 60;  var _back_hh = 14;
-var _back_hover = (_mx >= _back_cx - _back_hw && _mx <= _back_cx + _back_hw
-                && _my >= _back_cy - _back_hh && _my <= _back_cy + _back_hh);
+var _back_hover = (mouse_x >= _back_cx - _back_hw && mouse_x <= _back_cx + _back_hw
+                && mouse_y >= _back_cy - _back_hh && mouse_y <= _back_cy + _back_hh);
 if ((_back_hover && mouse_check_button_pressed(mb_left))
  || keyboard_check_pressed(vk_escape)) {
     room_goto(rm_title);
