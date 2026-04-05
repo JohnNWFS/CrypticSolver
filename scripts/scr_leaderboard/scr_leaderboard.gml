@@ -6,7 +6,7 @@
 
 // Shared secret — must match API_KEY in db_config.php on your server.
 // Generate a random string (e.g. openssl rand -hex 32) and paste it in both places.
-#macro LEADERBOARD_API_KEY "CHANGE_ME_BEFORE_DEPLOYMENT"
+#macro LEADERBOARD_API_KEY "CrypticSolverKey2026xJ9mLqR7vT"
 
 // ---------------------------------------------------------------------------
 // scr_fetch_leaderboard(puzzle_idx)
