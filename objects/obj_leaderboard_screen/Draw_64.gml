@@ -1,6 +1,6 @@
 /// @description Draw the leaderboard overview screen.
-var _gw = room_width;
-var _gh = room_height;
+var _gw = scr_ui_width();
+var _gh = scr_ui_height();
 var cx  = _gw * 0.5;
 
 // ---- Title ----
@@ -179,11 +179,16 @@ if (detail_puzzle >= 0) {
 }
 
 // ---- Back button ----
+// Position based on room_height so the button sits at the visual bottom
+// on both Windows and HTML5. Hit detection uses mouse_x/y (room space)
+// which correctly maps to that position on all platforms.
 var _back_cx = _gw * 0.5;
 var _back_cy = room_height - 60;
 var _back_hw = 60;  var _back_hh = 14;
-var _back_hover = (mouse_x >= _back_cx - _back_hw && mouse_x <= _back_cx + _back_hw
-                && mouse_y >= _back_cy - _back_hh && mouse_y <= _back_cy + _back_hh);
+var _bmx = scr_ui_mouse_x();
+var _bmy = scr_ui_mouse_y();
+var _back_hover = (_bmx >= _back_cx - _back_hw && _bmx <= _back_cx + _back_hw
+                && _bmy >= _back_cy - _back_hh && _bmy <= _back_cy + _back_hh);
 var _bfv = _back_hover ? 180 : 140;
 draw_set_colour(make_colour_hsv(210, 100, _bfv));
 draw_set_alpha(0.85);
