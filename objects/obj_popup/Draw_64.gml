@@ -206,20 +206,29 @@ if (popup_type == "win") {
     draw_set_alpha(popup_alpha);
 
     if (lb_state == "ready" && lb_qualify && !lb_submitted) {
-        // "Top 10!" label
+        // Row 1: "TOP 10!" header at _input_y
+        var _input_y = _entry_y - 34;
         draw_set_font(fnt_script);
         draw_set_halign(fa_left);
         draw_set_valign(fa_middle);
         draw_set_colour(_gold);
         draw_set_alpha(popup_alpha);
-        draw_text(_px + 28, _entry_y + 8, "Top 10!  Name:");
+        draw_text(_px + 28, _input_y + 8, "Top 10!");
 
-        // Name input box — shifted up 34px from the label/skip row
-        var _input_y = _entry_y - 34;
-        var _box_x1 = _px + 138;
-        var _box_x2 = _px + _pw - 128;
-        var _box_y1 = _input_y - 1;
-        var _box_y2 = _input_y + 18;
+        // Row 2: NAME: | [input box] | skip | SUBMIT  — all at _entry_y
+        // "NAME:" label
+        draw_set_font(fnt_script);
+        draw_set_halign(fa_left);
+        draw_set_valign(fa_middle);
+        draw_set_colour(_gold);
+        draw_set_alpha(popup_alpha);
+        draw_text(_px + 28, _entry_y + 8, "NAME:");
+
+        // Input box
+        var _box_x1 = _px + 98;
+        var _box_x2 = _px + _pw - 150;
+        var _box_y1 = _entry_y - 1;
+        var _box_y2 = _entry_y + 18;
         draw_set_colour(make_colour_hsv(0, 0, 20));
         draw_set_alpha(popup_alpha * 0.7);
         draw_rectangle(_box_x1, _box_y1, _box_x2, _box_y2, false);
@@ -233,12 +242,20 @@ if (popup_type == "win") {
         draw_set_halign(fa_left);
         draw_set_valign(fa_middle);
         var _cursor = ((lb_name_cursor div 30) mod 2 == 0) ? "|" : "";
-        draw_text(_box_x1 + 4, _input_y + 8, lb_name_input + _cursor);
+        draw_text(_box_x1 + 4, _entry_y + 8, lb_name_input + _cursor);
 
-        // Submit button — same shifted y
-        var _sb_cx = _px + _pw - 62;
-        var _sb_cy = _input_y + 8;
-        var _sbw = 100;  var _sbh = 24;
+        // Skip link — right of box
+        var _sk_x = _box_x2 + 8;
+        draw_set_font(-1);
+        draw_set_colour(make_colour_hsv(0, 0, lb_skip_hover ? 200 : 120));
+        draw_set_halign(fa_left);
+        draw_set_alpha(popup_alpha * 0.6);
+        draw_text(_sk_x, _entry_y + 8, "skip");
+
+        // SUBMIT button — far right
+        var _sb_cx = _px + _pw - 52;
+        var _sb_cy = _entry_y + 8;
+        var _sbw = 88;  var _sbh = 24;
         var _sfv = lb_submit_hover ? 190 : 155;
         draw_set_colour(make_colour_hsv(120, 150, _sfv));
         draw_set_alpha(popup_alpha);
@@ -250,13 +267,6 @@ if (popup_type == "win") {
         draw_set_halign(fa_center);
         draw_set_valign(fa_middle);
         draw_text(_sb_cx, _sb_cy, "SUBMIT");
-
-        // Skip link
-        draw_set_font(-1);
-        draw_set_colour(make_colour_hsv(0, 0, lb_skip_hover ? 200 : 120));
-        draw_set_halign(fa_center);
-        draw_set_alpha(popup_alpha * 0.6);
-        draw_text(_gw * 0.5 - 60, _entry_y + 8, "skip");
 
     } else if (lb_submitted && lb_submit_rank > 0) {
         draw_set_font(fnt_script);

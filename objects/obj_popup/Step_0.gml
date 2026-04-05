@@ -90,15 +90,18 @@ if (popup_type == "win") {
 
     // Submit / Skip buttons (only when qualifying and data ready)
     if (lb_state == "ready" && lb_qualify && !lb_submitted) {
-        var _sb_cx  = _gw * 0.5 + 218;   // matches Draw_64: _px + _pw - 62
-        var _sk_cx  = _gw * 0.5 - 60;
-        var _sb_y   = _py + 276;          // matches Draw_64: _input_y + 8 = (_py+302-34)+8
-        var _sk_y   = _py + 310;          // skip stays at _entry_y + 8
-        var _sbw    = 100;   var _sbh = 24;
+        // Both submit and skip are now on _entry_y row (_py + 310)
+        // _px = (_gw - 560) * 0.5;  _pw = 560
+        var _px     = (_gw - 560) * 0.5;
+        var _sb_cx  = _px + 560 - 52;    // matches Draw_64: _px + _pw - 52
+        var _sk_x1  = _px + 560 - 150 + 8; // matches Draw_64: _box_x2 + 8
+        var _sk_x2  = _sk_x1 + 36;
+        var _btn_y  = _py + 310;          // _entry_y + 8
+        var _sbw    = 88;   var _sbh = 24;
         lb_submit_hover = (_mx >= _sb_cx - _sbw*0.5 && _mx <= _sb_cx + _sbw*0.5
-                        && _my >= _sb_y - _sbh*0.5  && _my <= _sb_y + _sbh*0.5);
-        lb_skip_hover   = (_mx >= _sk_cx - _sbw*0.5 && _mx <= _sk_cx + _sbw*0.5
-                        && _my >= _sk_y - _sbh*0.5  && _my <= _sk_y + _sbh*0.5);
+                        && _my >= _btn_y - _sbh*0.5 && _my <= _btn_y + _sbh*0.5);
+        lb_skip_hover   = (_mx >= _sk_x1 && _mx <= _sk_x2
+                        && _my >= _btn_y - _sbh*0.5 && _my <= _btn_y + _sbh*0.5);
         if (lb_submit_hover && mouse_check_button_pressed(mb_left) && popup_alpha >= 0.8) {
             keyboard_virtual_hide();
             global.lb_submit_state = "pending";
