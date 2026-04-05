@@ -78,24 +78,27 @@ if (is_numeric($puzzle_param)) {
 
 // ---- Best score per puzzle (leaderboard screen overview) ----
 } elseif ($puzzle_param === 'all') {
-    // One row per puzzle — the best score (stars DESC, time ASC)
-    // Correlated subquery avoids ONLY_FULL_GROUP_BY issues on MySQL 5.7+
+    // Fetch all rows ordered best-first, then pick one per puzzle in PHP
     $stmt = $pdo->query(
-        'SELECT cs.puzzle_index, cs.player_name AS name, cs.stars, cs.time_seconds
-         FROM cryptic_scores cs
-         WHERE cs.id = (
-             SELECT s2.id FROM cryptic_scores s2
-             WHERE s2.puzzle_index = cs.puzzle_index
-             ORDER BY s2.stars DESC, s2.time_seconds ASC
-             LIMIT 1
-         )
-         ORDER BY cs.puzzle_index ASC'
+        'SELECT puzzle_index, player_name AS name, stars, time_seconds
+         FROM cryptic_scores
+         ORDER BY puzzle_index ASC, stars DESC, time_seconds ASC'
     );
-    $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    foreach ($rows as &$r) {
-        $r['puzzle_index'] = (int)$r['puzzle_index'];
-        $r['stars']        = (int)$r['stars'];
-        $r['time_seconds'] = (int)$r['time_seconds'];
+    $all_rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    // Keep only the first (best) row per puzzle_index
+    $seen = [];
+    $rows = [];
+    foreach ($all_rows as $r) {
+        $pi = (int)$r['puzzle_index'];
+        if (!isset($seen[$pi])) {
+            $seen[$pi] = true;
+            $rows[] = [
+                'puzzle_index' => $pi,
+                'name'         => $r['name'],
+                'stars'        => (int)$r['stars'],
+                'time_seconds' => (int)$r['time_seconds'],
+            ];
+        }
     }
     echo json_encode(['type' => 'all', 'scores' => $rows]);
 
